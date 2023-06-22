@@ -15,6 +15,12 @@ public:
     explicit signUp(QWidget *parent = nullptr);
     ~signUp();
 
+private slots:
+
+    void on_showPassword_clicked();
+
+    void on_confirm_clicked();
+
 private:
     Ui::signUp *ui;
 };

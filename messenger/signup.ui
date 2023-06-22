@@ -191,7 +191,7 @@ border-bottom: 1px solid #717072
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="lineEdit_p">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -204,7 +204,7 @@ border-bottom: 1px solid #717072
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="lineEdit_c">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -217,11 +217,11 @@ border-bottom: 1px solid #717072
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="confirm">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>410</y>
+      <y>420</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -240,11 +240,11 @@ border-bottom: 1px solid #717072
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="showPassword">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>340</y>
+      <y>350</y>
       <width>31</width>
       <height>31</height>
      </rect>
