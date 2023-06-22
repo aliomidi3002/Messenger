@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>image/436-4363443_view-user-icon-png-font-awesome-user-circle.png</file>
+        <file>image/93634.png</file>
+        <file>image/2889676.png</file>
+        <file>image/4779893-200.png</file>
+        <file>image/emoji-smile-icon-symbol-on-yellow-background-smiley-face-cartoon-character-wallpaper-vector.jpg</file>
+        <file>image/iStock-697020460-scaled.jpg</file>
+        <file>image/Sample_User_Icon.png</file>
+    </qresource>
+</RCC>
