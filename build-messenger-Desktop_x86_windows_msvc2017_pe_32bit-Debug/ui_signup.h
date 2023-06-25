@@ -14,10 +14,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QToolButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -32,15 +34,22 @@ public:
     QLabel *label_5;
     QLabel *label_6;
     QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_fn;
+    QLineEdit *lineEdit_ln;
+    QLineEdit *lineEdit_u;
     QLineEdit *lineEdit_p;
     QLineEdit *lineEdit_c;
     QPushButton *confirm;
     QPushButton *showPassword;
-    QToolButton *toolButton;
+    QLabel *label_7;
     QPushButton *pushButton_4;
+    QToolButton *toolButton;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout_3;
+    QWidget *widget2;
+    QHBoxLayout *horizontalLayout_4;
 
     void setupUi(QDialog *signUp)
     {
@@ -74,13 +83,6 @@ public:
 "}\n"
 "\n"
 "\n"
-"QLabel{\n"
-"color:white;\n"
-"border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";\n"
-"}\n"
-"\n"
-"\n"
 "QLineEdit{\n"
 "background:transparent;\n"
 "border:none;\n"
@@ -94,68 +96,113 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         label = new QLabel(frame);
         label->setObjectName("label");
-        label->setGeometry(QRect(20, 110, 131, 31));
+        label->setGeometry(QRect(30, 100, 131, 31));
+        label->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         label_2 = new QLabel(frame);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(20, 180, 131, 31));
+        label_2->setGeometry(QRect(30, 170, 131, 31));
+        label_2->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         label_3 = new QLabel(frame);
         label_3->setObjectName("label_3");
-        label_3->setGeometry(QRect(20, 250, 131, 31));
+        label_3->setGeometry(QRect(30, 240, 131, 31));
+        label_3->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         label_4 = new QLabel(frame);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(20, 310, 131, 31));
+        label_4->setGeometry(QRect(30, 310, 131, 31));
+        label_4->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         label_5 = new QLabel(frame);
         label_5->setObjectName("label_5");
-        label_5->setGeometry(QRect(20, 380, 131, 31));
+        label_5->setGeometry(QRect(30, 380, 131, 31));
+        label_5->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         label_6 = new QLabel(frame);
         label_6->setObjectName("label_6");
-        label_6->setGeometry(QRect(170, 70, 161, 31));
+        label_6->setGeometry(QRect(180, 70, 161, 31));
+        label_6->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";"));
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(10, 460, 471, 41));
-        lineEdit = new QLineEdit(frame);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setGeometry(QRect(30, 150, 391, 16));
-        lineEdit_2 = new QLineEdit(frame);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(30, 210, 391, 21));
-        lineEdit_3 = new QLineEdit(frame);
-        lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(30, 280, 391, 21));
+        lineEdit_fn = new QLineEdit(frame);
+        lineEdit_fn->setObjectName("lineEdit_fn");
+        lineEdit_fn->setGeometry(QRect(30, 130, 391, 31));
+        lineEdit_fn->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        lineEdit_ln = new QLineEdit(frame);
+        lineEdit_ln->setObjectName("lineEdit_ln");
+        lineEdit_ln->setGeometry(QRect(30, 200, 391, 31));
+        lineEdit_ln->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        lineEdit_u = new QLineEdit(frame);
+        lineEdit_u->setObjectName("lineEdit_u");
+        lineEdit_u->setGeometry(QRect(30, 270, 391, 31));
+        lineEdit_u->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         lineEdit_p = new QLineEdit(frame);
         lineEdit_p->setObjectName("lineEdit_p");
-        lineEdit_p->setGeometry(QRect(30, 350, 391, 16));
+        lineEdit_p->setGeometry(QRect(30, 340, 391, 31));
+        lineEdit_p->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         lineEdit_p->setEchoMode(QLineEdit::Password);
         lineEdit_c = new QLineEdit(frame);
         lineEdit_c->setObjectName("lineEdit_c");
-        lineEdit_c->setGeometry(QRect(30, 420, 391, 16));
+        lineEdit_c->setGeometry(QRect(30, 410, 391, 31));
+        lineEdit_c->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         lineEdit_c->setEchoMode(QLineEdit::Password);
         confirm = new QPushButton(frame);
         confirm->setObjectName("confirm");
-        confirm->setGeometry(QRect(430, 420, 31, 31));
+        confirm->setGeometry(QRect(440, 410, 31, 31));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/new/prefix1/image/4779893-200.png"), QSize(), QIcon::Normal, QIcon::Off);
         confirm->setIcon(icon);
         confirm->setIconSize(QSize(30, 30));
         showPassword = new QPushButton(frame);
         showPassword->setObjectName("showPassword");
-        showPassword->setGeometry(QRect(430, 350, 31, 31));
+        showPassword->setGeometry(QRect(440, 340, 31, 31));
         showPassword->setIcon(icon);
         showPassword->setIconSize(QSize(30, 30));
-        toolButton = new QToolButton(signUp);
-        toolButton->setObjectName("toolButton");
-        toolButton->setGeometry(QRect(340, 10, 121, 121));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/Sample_User_Icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolButton->setIcon(icon1);
-        toolButton->setIconSize(QSize(70, 70));
+        label_7 = new QLabel(frame);
+        label_7->setObjectName("label_7");
+        label_7->setGeometry(QRect(160, 110, 311, 31));
+        label_7->setStyleSheet(QString::fromUtf8(""));
         pushButton_4 = new QPushButton(signUp);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(20, 20, 51, 41));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/93634.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_4->setIcon(icon2);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/93634.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_4->setIcon(icon1);
         pushButton_4->setIconSize(QSize(30, 30));
+        toolButton = new QToolButton(signUp);
+        toolButton->setObjectName("toolButton");
+        toolButton->setGeometry(QRect(350, 10, 121, 121));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/Sample_User_Icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton->setIcon(icon2);
+        toolButton->setIconSize(QSize(70, 70));
+        widget = new QWidget(signUp);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        widget1 = new QWidget(signUp);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout_3 = new QHBoxLayout(widget1);
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        widget2 = new QWidget(signUp);
+        widget2->setObjectName("widget2");
+        widget2->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout_4 = new QHBoxLayout(widget2);
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
 
         retranslateUi(signUp);
 
@@ -172,10 +219,16 @@ public:
         label_5->setText(QCoreApplication::translate("signUp", "Confirm", nullptr));
         label_6->setText(QCoreApplication::translate("signUp", "SignUP here", nullptr));
         pushButton->setText(QCoreApplication::translate("signUp", "SignUp", nullptr));
+        lineEdit_fn->setPlaceholderText(QCoreApplication::translate("signUp", "First Name", nullptr));
+        lineEdit_ln->setPlaceholderText(QCoreApplication::translate("signUp", "Last Name", nullptr));
+        lineEdit_u->setPlaceholderText(QCoreApplication::translate("signUp", "Username", nullptr));
+        lineEdit_p->setPlaceholderText(QCoreApplication::translate("signUp", "Password", nullptr));
+        lineEdit_c->setPlaceholderText(QCoreApplication::translate("signUp", "confirm", nullptr));
         confirm->setText(QString());
         showPassword->setText(QString());
-        toolButton->setText(QString());
+        label_7->setText(QString());
         pushButton_4->setText(QString());
+        toolButton->setText(QString());
     } // retranslateUi
 
 };

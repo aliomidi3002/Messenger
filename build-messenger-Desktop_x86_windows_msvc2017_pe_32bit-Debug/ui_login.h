@@ -32,6 +32,7 @@ public:
     QLabel *label_2;
     QLineEdit *lineEdit_p;
     QPushButton *showPassword;
+    QLabel *label_4;
     QToolButton *toolButton;
     QPushButton *pushButton_b;
 
@@ -67,11 +68,6 @@ public:
 "}\n"
 "\n"
 "\n"
-"QLabel{\n"
-"color:white;\n"
-"border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";\n"
-"}\n"
 "\n"
 "\n"
 "QLineEdit{\n"
@@ -91,18 +87,38 @@ public:
         label_3 = new QLabel(frame);
         label_3->setObjectName("label_3");
         label_3->setGeometry(QRect(180, 80, 151, 31));
+        label_3->setStyleSheet(QString::fromUtf8("QLabel{\n"
+"color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";\n"
+"}\n"
+""));
         label = new QLabel(frame);
         label->setObjectName("label");
-        label->setGeometry(QRect(20, 180, 151, 41));
+        label->setGeometry(QRect(20, 240, 151, 41));
+        label->setStyleSheet(QString::fromUtf8("QLabel{\n"
+"color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";\n"
+"}\n"
+""));
         lineEdit_2 = new QLineEdit(frame);
         lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(20, 220, 381, 21));
+        lineEdit_2->setGeometry(QRect(20, 280, 371, 31));
+        lineEdit_2->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         label_2 = new QLabel(frame);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(20, 320, 121, 31));
+        label_2->setGeometry(QRect(20, 330, 121, 31));
+        label_2->setStyleSheet(QString::fromUtf8("QLabel{\n"
+"color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";\n"
+"}\n"
+""));
         lineEdit_p = new QLineEdit(frame);
         lineEdit_p->setObjectName("lineEdit_p");
-        lineEdit_p->setGeometry(QRect(20, 360, 371, 21));
+        lineEdit_p->setGeometry(QRect(20, 360, 371, 31));
+        lineEdit_p->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         lineEdit_p->setEchoMode(QLineEdit::Password);
         showPassword = new QPushButton(frame);
         showPassword->setObjectName("showPassword");
@@ -111,6 +127,9 @@ public:
         icon.addFile(QString::fromUtf8(":/new/prefix1/image/4779893-200.png"), QSize(), QIcon::Normal, QIcon::Off);
         showPassword->setIcon(icon);
         showPassword->setIconSize(QSize(30, 30));
+        label_4 = new QLabel(frame);
+        label_4->setObjectName("label_4");
+        label_4->setGeometry(QRect(180, 240, 291, 41));
         toolButton = new QToolButton(Login);
         toolButton->setObjectName("toolButton");
         toolButton->setGeometry(QRect(360, 10, 121, 121));
@@ -141,6 +160,7 @@ public:
         label_2->setText(QCoreApplication::translate("Login", "Password", nullptr));
         lineEdit_p->setPlaceholderText(QCoreApplication::translate("Login", "Password", nullptr));
         showPassword->setText(QString());
+        label_4->setText(QString());
         toolButton->setText(QString());
         pushButton_b->setText(QString());
     } // retranslateUi
