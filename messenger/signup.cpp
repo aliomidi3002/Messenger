@@ -4,7 +4,9 @@
 #include <QTextStream>
 #include "ID.h"
 #include <QtNetwork>
+QString response_code(QString Server_Response);
 QString signup_to_server(QString user,QString pass) {
+
     QString url1= "http://api.barafardayebehtar.ml:8080/signup?username=";
     QString url2= "&password=";
 
@@ -37,15 +39,14 @@ QString signup_to_server(QString user,QString pass) {
         response = QString(responseData);
     } else {
         // Handle error cases
-        qDebug() << "Error:" << reply->errorString();
+        //qDebug() << "Error:" << reply->errorString();
     }
 
     // Clean up
     reply->deleteLater();
 
-    return response;
-}
-signUp::signUp(QWidget *parent) :
+    return response_code(response);
+}signUp::signUp(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::signUp)
 {
@@ -181,37 +182,6 @@ void signUp::on_pushButton_clicked()
     }
 
 
-    QString filePath = "C:/Users/nvdom/Desktop/Messenger/messenger/account.txt";
-    QFile file(filePath);
-
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QTextStream stream(&file);
-
-        bool found = false;
-
-        while (!stream.atEnd())
-        {
-            QString line = stream.readLine();
-            QStringList parts = line.split("-");
-            if (parts.size() >= 2)
-            {
-                QString storedUsername = parts[0];
-                QString storedPassword = parts[1];
-
-                if (Username_in == storedUsername)
-                {
-                    ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-                    ui->label_7->setText("Username Has Been Taken");
-                    return;
-                }
-            }
-        }
-
-        file.close();
-    }
-
-
     std::string username = Username_in.toStdString();
     std::string password = Password_in.toStdString();
     std::string firstName = FirstName_in.toStdString();
@@ -219,16 +189,16 @@ void signUp::on_pushButton_clicked()
 
     userID currentUser = userID(username , password , firstName , lastName);
 
+    QString respons_signUp = signup_to_server(Username_in , Password_in);
 
-    if (file.open(QIODevice::Append | QIODevice::Text))
-    {
-        QTextStream stream(&file);
-        stream << Username_in << "-" << Password_in << "-" << FirstName_in << "-" << LastName_in << ";" << "\n"; // Write the strings to the file
-        file.close(); // Close the file
-        hide();
-        ChatPage = new Chatpage(this , currentUser);
-        ChatPage->show();
-    }
+// 200   موفق
+// 404   اتصال ناموفق
+// 204   تکراری
+//401    اطلاعات نادرست
+//300     قبلا ورود کرده اید
 }
+//hide();
+//ChatPage = new Chatpage(this , currentUser);
+//Chatpage->show();
 
 
