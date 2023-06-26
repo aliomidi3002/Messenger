@@ -3,7 +3,48 @@
 #include <QFile>
 #include <QTextStream>
 #include "ID.h"
+#include <QtNetwork>
+QString signup_to_server(QString user,QString pass) {
+    QString url1= "http://api.barafardayebehtar.ml:8080/signup?username=";
+    QString url2= "&password=";
 
+    url1=url1+user+url2+pass;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    return response;
+}
 signUp::signUp(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::signUp)
