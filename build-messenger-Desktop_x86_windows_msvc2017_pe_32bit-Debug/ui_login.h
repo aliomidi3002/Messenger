@@ -68,8 +68,6 @@ public:
 "}\n"
 "\n"
 "\n"
-"\n"
-"\n"
 "QLineEdit{\n"
 "background:transparent;\n"
 "border:none;\n"

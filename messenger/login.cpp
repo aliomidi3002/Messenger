@@ -3,6 +3,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include "ID.h"
+
 
 Login::Login(QWidget *parent) :
     QDialog(parent),
@@ -61,6 +63,8 @@ void Login::on_pushButton_clicked()
     QString filePath = "C:/Users/nvdom/Desktop/Messenger/messenger/account.txt";
     QFile file(filePath);
 
+    userID currentUser;
+
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream stream(&file);
@@ -71,14 +75,21 @@ void Login::on_pushButton_clicked()
         {
             QString line = stream.readLine();
             QStringList parts = line.split("-");
-            if (parts.size() >= 2)
+            if (parts.size() >= 4)
             {
                 QString storedUsername = parts[0];
                 QString storedPassword = parts[1];
+                QString storedFirstName = parts[2];
+                QString storedLastName = parts[3];
 
                 if (Username == storedUsername && Password == storedPassword)
                 {
                     found = true;
+                    std::string username = storedUsername.toStdString();
+                    std::string password = storedPassword.toStdString();
+                    std::string firstName = storedFirstName.toStdString();
+                    std::string lastName = storedLastName.toStdString();
+                    currentUser = userID(username, password, firstName, lastName);
                     break;
                 }
             }
@@ -89,8 +100,8 @@ void Login::on_pushButton_clicked()
         if (found)
         {
             hide();
-            ChatPage = new Chatpage(this);
-            ChatPage->show();
+            Chatpage* chatPage = new Chatpage(this, currentUser);
+            chatPage->show();
         }
         else
         {

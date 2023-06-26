@@ -22,7 +22,6 @@ private slots:
 
 private:
     Ui::Login *ui;
-    Chatpage *ChatPage;
 
 };
 

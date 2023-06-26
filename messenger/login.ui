@@ -41,8 +41,6 @@ background-color: rgb(0, 0, 127);
 }
 
 
-
-
 QLineEdit{
 background:transparent;
 border:none;

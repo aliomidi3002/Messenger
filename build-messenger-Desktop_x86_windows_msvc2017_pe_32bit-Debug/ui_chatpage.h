@@ -17,26 +17,18 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QScrollBar>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_Chatpage
 {
 public:
-    QTextEdit *textEdit;
     QFrame *frame;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QToolButton *toolButton;
     QLabel *label;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
-    QScrollBar *verticalScrollBar;
     QToolButton *toolButton_2;
     QLabel *label_2;
     QPushButton *pushButton_3;
@@ -68,11 +60,6 @@ public:
 "}\n"
 "\n"
 ""));
-        textEdit = new QTextEdit(Chatpage);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(340, 70, 851, 461));
-        textEdit->setStyleSheet(QString::fromUtf8("border-radius:60px;\n"
-"border: 2px solid #717072;;"));
         frame = new QFrame(Chatpage);
         frame->setObjectName("frame");
         frame->setGeometry(QRect(0, 0, 331, 591));
@@ -112,20 +99,6 @@ public:
 "font: 700 12pt \"Segoe UI\";\n"
 ""));
         label->setAlignment(Qt::AlignCenter);
-        scrollArea = new QScrollArea(frame);
-        scrollArea->setObjectName("scrollArea");
-        scrollArea->setGeometry(QRect(10, 100, 311, 481));
-        scrollArea->setStyleSheet(QString::fromUtf8("background-color: rgb(77, 77, 77);"));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 309, 479));
-        verticalScrollBar = new QScrollBar(scrollAreaWidgetContents);
-        verticalScrollBar->setObjectName("verticalScrollBar");
-        verticalScrollBar->setGeometry(QRect(290, 0, 20, 481));
-        verticalScrollBar->setStyleSheet(QString::fromUtf8("background-color: rgb(79, 79, 79);"));
-        verticalScrollBar->setOrientation(Qt::Vertical);
-        scrollArea->setWidget(scrollAreaWidgetContents);
         toolButton_2 = new QToolButton(Chatpage);
         toolButton_2->setObjectName("toolButton_2");
         toolButton_2->setGeometry(QRect(350, 10, 51, 51));
@@ -174,18 +147,10 @@ public:
     void retranslateUi(QDialog *Chatpage)
     {
         Chatpage->setWindowTitle(QCoreApplication::translate("Chatpage", "Dialog", nullptr));
-        textEdit->setHtml(QCoreApplication::translate("Chatpage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         pushButton->setText(QString());
         pushButton_2->setText(QString());
         toolButton->setText(QString());
-        label->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
+        label->setText(QString());
         toolButton_2->setText(QString());
         label_2->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
         pushButton_3->setText(QString());
