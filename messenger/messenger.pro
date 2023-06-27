@@ -21,7 +21,8 @@ HEADERS += \
     chatpage.h \
     login.h \
     mainwindow.h \
-    signup.h
+    signup.h \
+    text_chat.h
 
 FORMS += \
     chatpage.ui \
