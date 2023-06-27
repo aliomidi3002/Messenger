@@ -9,10 +9,8 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
 {
     ui->setupUi(this);
 
-    QString username = QString::fromStdString(currentUser.getUsername());
-    QString password = QString::fromStdString(currentUser.getPassword());
-    QString firstName = QString::fromStdString(currentUser.getFirstName());
-    QString lastName = QString::fromStdString(currentUser.getLastName());
+    QString username = currentUser.getUsername();
+    QString password = currentUser.getPassword();
 
     ui->label->setText(username);
 }

@@ -155,6 +155,7 @@ public:
         label_2->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
         pushButton_3->setText(QString());
         pushButton_4->setText(QString());
+        lineEdit->setText(QString());
         lineEdit->setPlaceholderText(QCoreApplication::translate("Chatpage", "write a message...", nullptr));
     } // retranslateUi
 

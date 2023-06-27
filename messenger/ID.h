@@ -3,37 +3,30 @@
 #include<iostream>
 #include<QString>
 class userID{
-    std::string username;
-    std::string password;
-    std::string firstName;
-    std::string lastName;
+    QString username;
+    QString password;
     //qstrign token
 
 public:
     //constructor
     userID() = default;
 
-    userID(std::string username , std::string password , std::string firstName , std::string lastName){
+    userID(QString username , QString password){
         this->username = username;
         this->password = password;
-        this->firstName = firstName;
-        this->lastName = lastName;
     }
 
     // getters;
-    std::string getUsername() const{return username;}
-    std::string getPassword() const{return password;}
-    std::string getFirstName() const{return firstName;}
-    std::string getLastName() const{return lastName;}
+    QString getUsername() const{return username;}
+    QString getPassword() const{return password;}
 
     // settes
-    void setUsername(std::string username){this->username = username;}
-    void setPassword(std::string password){this->password = password;}
-    void setFirstName(std::string firstName){this->firstName = firstName;}
-    void setLastName(std::string lastName){this->lastName = lastName;}
+    void setUsername(QString username){this->username = username;}
+    void setPassword(QString password){this->password = password;}
 
     //current User
 };
+
 class chat:public userID{
 public:
     QString chat_label_display;

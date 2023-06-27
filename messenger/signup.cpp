@@ -111,24 +111,10 @@ void signUp::on_pushButton_4_clicked()
 // sign up button
 void signUp::on_pushButton_clicked()
 {
-    QString FirstName_in = ui->lineEdit_fn->text();
-    QString LastName_in  = ui->lineEdit_ln->text();
     QString Username_in  = ui->lineEdit_u->text();
     QString Password_in  = ui->lineEdit_p->text();
     QString Confirm_in   = ui->lineEdit_c->text();
 
-
-    if(FirstName_in.size()< 3){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt;");
-        ui->label_7->setText("First Name Must Be More Than 3 Characters");
-        return;
-    }
-
-    if(LastName_in.size()< 3){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-        ui->label_7->setText("Last Name Must Be More Than 3 Characters");
-        return;
-    }
 
     if(Username_in.size()<= 4){
         ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
@@ -143,19 +129,7 @@ void signUp::on_pushButton_clicked()
     }
 
 
-    if (FirstName_in.isEmpty()) {
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-        ui->label_7->setText("Enter Your First Name");
-        return;
-    }
-
-    else if (LastName_in.isEmpty()) {
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-        ui->label_7->setText("Enter Your Last Name");
-        return;
-    }
-
-    else if (Username_in.isEmpty()) {
+    if (Username_in.isEmpty()) {
         ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Enter Your Username");
         return;
@@ -182,21 +156,49 @@ void signUp::on_pushButton_clicked()
     }
 
 
-    std::string username = Username_in.toStdString();
-    std::string password = Password_in.toStdString();
-    std::string firstName = FirstName_in.toStdString();
-    std::string lastName = LastName_in.toStdString();
-
-    userID currentUser = userID(username , password , firstName , lastName);
+    userID currentUser = userID(Username_in , Password_in);
 
     QString respons_signUp = signup_to_server(Username_in , Password_in);
 
+    if(respons_signUp == "200"){
+        hide();
+        ChatPage = new Chatpage(this , currentUser);
+        ChatPage->show();
+    }
+
+    else if(respons_signUp == "404"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Connection lost! :(");
+        return;
+    }
+
+
+    else if (respons_signUp == "204"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Username has already taken");
+        return;
+    }
+
+    else if(respons_signUp == "401"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("401???!");
+        return;
+    }
+
+
+    else if(respons_signUp == "300"){
+        hide();
+        ChatPage = new Chatpage(this , currentUser);
+        ChatPage->show();
+    }
+
+
+}
 // 200   موفق
 // 404   اتصال ناموفق
 // 204   تکراری
 //401    اطلاعات نادرست
 //300     قبلا ورود کرده اید
-}
 //hide();
 //ChatPage = new Chatpage(this , currentUser);
 //Chatpage->show();

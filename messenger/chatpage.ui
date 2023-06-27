@@ -267,6 +267,9 @@ font: 700 12pt &quot;Segoe UI&quot;;
 border: 2px solid #717072;;
 background-color: rgba(0,0,0,0.8);</string>
    </property>
+   <property name="text">
+    <string/>
+   </property>
    <property name="placeholderText">
     <string>write a message...</string>
    </property>

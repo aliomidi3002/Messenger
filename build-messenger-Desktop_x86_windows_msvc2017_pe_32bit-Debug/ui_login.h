@@ -127,7 +127,7 @@ public:
         showPassword->setIconSize(QSize(30, 30));
         label_4 = new QLabel(frame);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(180, 240, 291, 41));
+        label_4->setGeometry(QRect(90, 120, 291, 41));
         toolButton = new QToolButton(Login);
         toolButton->setObjectName("toolButton");
         toolButton->setGeometry(QRect(360, 10, 121, 121));
