@@ -1,6 +1,7 @@
 #include "chatpage.h"
 #include "ui_chatpage.h"
 #include "ID.h"
+#include "setting.h"
 
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
@@ -19,3 +20,4 @@ Chatpage::~Chatpage()
 {
     delete ui;
 }
+

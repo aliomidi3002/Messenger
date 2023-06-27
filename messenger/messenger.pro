@@ -14,6 +14,7 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
+    setting.cpp \
     signup.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     chatpage.h \
     login.h \
     mainwindow.h \
+    setting.h \
     signup.h \
     text_chat.h
 
@@ -28,6 +30,7 @@ FORMS += \
     chatpage.ui \
     login.ui \
     mainwindow.ui \
+    setting.ui \
     signup.ui
 
 # Default rules for deployment.

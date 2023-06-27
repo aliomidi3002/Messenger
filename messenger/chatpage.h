@@ -16,6 +16,9 @@ public:
     explicit Chatpage(QWidget *parent = nullptr, const userID& currentUser = userID());
     ~Chatpage();
 
+private slots:
+
+
 private:
     Ui::Chatpage *ui;
     userID mCurrentUser;

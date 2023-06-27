@@ -41,7 +41,7 @@ background-color: rgba(0,0,0,0.8);
      <x>0</x>
      <y>0</y>
      <width>331</width>
-     <height>591</height>
+     <height>601</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -53,56 +53,10 @@ background-color: rgba(0,0,0,0.8);
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:15px;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/image/76716.png</normaloff>:/new/prefix1/image/76716.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:15px;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/image/search-icon.png</normaloff>:/new/prefix1/image/search-icon.png</iconset>
-    </property>
-   </widget>
    <widget class="QToolButton" name="toolButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>10</x>
       <y>10</y>
       <width>71</width>
       <height>71</height>
@@ -129,7 +83,7 @@ border: 2px solid #717072;;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>90</x>
       <y>20</y>
       <width>191</width>
       <height>61</height>
@@ -153,7 +107,7 @@ font: 700 12pt &quot;Segoe UI&quot;;
   <widget class="QToolButton" name="toolButton_2">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>340</x>
      <y>10</y>
      <width>51</width>
      <height>51</height>
@@ -181,7 +135,7 @@ border: 2px solid #717072;;
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>400</x>
      <y>10</y>
      <width>201</width>
      <height>51</height>
@@ -198,7 +152,7 @@ font: 700 12pt &quot;Segoe UI&quot;;
     <string>Username</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">

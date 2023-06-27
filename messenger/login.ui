@@ -178,7 +178,7 @@ font: 900 14pt &quot;Segoe UI Black&quot;;
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>360</y>
+      <y>370</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -208,6 +208,9 @@ font: 900 14pt &quot;Segoe UI Black&quot;;
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

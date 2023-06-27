@@ -168,9 +168,9 @@ void Login::on_pushButton_clicked()
 
 
     else if(respons_login == "300"){
-        hide();
-        Chatpage* chatPage = new Chatpage(this, currentUser);
-        chatPage->show();
+        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
+        ui->label_4->setText("You already loged in");
+        return;
     }
 
     else if(respons_login == "204"){
