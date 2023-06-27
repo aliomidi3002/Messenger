@@ -14,7 +14,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QToolButton>
 
@@ -29,7 +28,6 @@ public:
     QPushButton *pushButton_3;
     QToolButton *toolButton;
     QPushButton *pushButton_4;
-    QLineEdit *lineEdit;
 
     void setupUi(QDialog *Setting)
     {
@@ -93,9 +91,6 @@ public:
         icon1.addFile(QString::fromUtf8(":/new/prefix1/image/93634.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_4->setIcon(icon1);
         pushButton_4->setIconSize(QSize(40, 40));
-        lineEdit = new QLineEdit(Setting);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setGeometry(QRect(200, 530, 351, 28));
 
         retranslateUi(Setting);
 
@@ -110,7 +105,6 @@ public:
         pushButton_3->setText(QCoreApplication::translate("Setting", "New Channel", nullptr));
         toolButton->setText(QString());
         pushButton_4->setText(QString());
-        lineEdit->setPlaceholderText(QCoreApplication::translate("Setting", "password", nullptr));
     } // retranslateUi
 
 };

@@ -145,19 +145,6 @@ background-color: rgb(0, 0, 127);
     </size>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>530</y>
-     <width>351</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>password</string>
-   </property>
-  </widget>
  </widget>
  <resources>
   <include location="images.qrc"/>

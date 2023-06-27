@@ -21,3 +21,13 @@ Chatpage::~Chatpage()
     delete ui;
 }
 
+
+void Chatpage::on_pushButton_clicked()
+{
+    hide();
+    Setting *set;
+    set = new Setting(this);
+    set->show();
+
+}
+

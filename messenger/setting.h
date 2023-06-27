@@ -15,6 +15,9 @@ public:
     explicit Setting(QWidget *parent = nullptr);
     ~Setting();
 
+private slots:
+    void on_pushButton_4_clicked();
+
 private:
     Ui::Setting *ui;
 };

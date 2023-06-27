@@ -27,6 +27,7 @@ public:
     QFrame *frame;
     QToolButton *toolButton;
     QLabel *label;
+    QPushButton *pushButton;
     QToolButton *toolButton_2;
     QLabel *label_2;
     QPushButton *pushButton_3;
@@ -44,8 +45,13 @@ public:
 "\n"
 "QPushButton{\n"
 "border-radius:15px;\n"
-"	background-color: rgb(60, 60, 90);\n"
+"background-color: rgb(0, 85, 127);\n"
 "}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgb(0, 0, 127);\n"
+"}\n"
+"\n"
 "\n"
 "QToolButton{\n"
 "background-color: rgb(0, 85, 127);\n"
@@ -82,6 +88,12 @@ public:
 "font: 700 12pt \"Segoe UI\";\n"
 ""));
         label->setAlignment(Qt::AlignCenter);
+        pushButton = new QPushButton(frame);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(290, 10, 31, 31));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/76716.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon1);
         toolButton_2 = new QToolButton(Chatpage);
         toolButton_2->setObjectName("toolButton_2");
         toolButton_2->setGeometry(QRect(340, 10, 51, 51));
@@ -103,17 +115,17 @@ public:
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(1110, 540, 31, 41));
         pushButton_3->setStyleSheet(QString::fromUtf8("background-color: rgb(95, 95, 95);"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/1500458.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_3->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/1500458.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_3->setIcon(icon2);
         pushButton_3->setIconSize(QSize(30, 30));
         pushButton_4 = new QPushButton(Chatpage);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(1150, 540, 31, 41));
         pushButton_4->setStyleSheet(QString::fromUtf8("background-color: rgb(95, 95, 95);"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/clip-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_4->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/clip-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_4->setIcon(icon3);
         pushButton_4->setIconSize(QSize(30, 30));
         lineEdit = new QLineEdit(Chatpage);
         lineEdit->setObjectName("lineEdit");
@@ -132,6 +144,7 @@ public:
         Chatpage->setWindowTitle(QCoreApplication::translate("Chatpage", "Dialog", nullptr));
         toolButton->setText(QString());
         label->setText(QString());
+        pushButton->setText(QString());
         toolButton_2->setText(QString());
         label_2->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
         pushButton_3->setText(QString());
