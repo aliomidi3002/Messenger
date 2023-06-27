@@ -120,14 +120,15 @@ public:
         lineEdit_p->setEchoMode(QLineEdit::Password);
         showPassword = new QPushButton(frame);
         showPassword->setObjectName("showPassword");
-        showPassword->setGeometry(QRect(410, 360, 31, 31));
+        showPassword->setGeometry(QRect(410, 370, 31, 31));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/new/prefix1/image/4779893-200.png"), QSize(), QIcon::Normal, QIcon::Off);
         showPassword->setIcon(icon);
         showPassword->setIconSize(QSize(30, 30));
         label_4 = new QLabel(frame);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(180, 240, 291, 41));
+        label_4->setGeometry(QRect(90, 120, 291, 41));
+        label_4->setAlignment(Qt::AlignCenter);
         toolButton = new QToolButton(Login);
         toolButton->setObjectName("toolButton");
         toolButton->setGeometry(QRect(360, 10, 121, 121));

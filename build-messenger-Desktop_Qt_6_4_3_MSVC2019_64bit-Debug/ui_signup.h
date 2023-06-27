@@ -44,11 +44,11 @@ public:
     QLabel *label_7;
     QPushButton *pushButton_4;
     QToolButton *toolButton;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_3;
-    QWidget *widget2;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_4;
 
     void setupUi(QDialog *signUp)
@@ -171,6 +171,7 @@ public:
         label_7->setObjectName("label_7");
         label_7->setGeometry(QRect(160, 110, 311, 31));
         label_7->setStyleSheet(QString::fromUtf8(""));
+        label_7->setAlignment(Qt::AlignCenter);
         pushButton_4 = new QPushButton(signUp);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(20, 20, 51, 41));
@@ -185,22 +186,22 @@ public:
         icon2.addFile(QString::fromUtf8(":/new/prefix1/image/Sample_User_Icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon2);
         toolButton->setIconSize(QSize(70, 70));
-        widget = new QWidget(signUp);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 0, 2, 2));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(signUp);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        widget1 = new QWidget(signUp);
-        widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(0, 0, 2, 2));
-        horizontalLayout_3 = new QHBoxLayout(widget1);
+        layoutWidget1 = new QWidget(signUp);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        widget2 = new QWidget(signUp);
-        widget2->setObjectName("widget2");
-        widget2->setGeometry(QRect(0, 0, 2, 2));
-        horizontalLayout_4 = new QHBoxLayout(widget2);
+        layoutWidget2 = new QWidget(signUp);
+        layoutWidget2->setObjectName("layoutWidget2");
+        layoutWidget2->setGeometry(QRect(0, 0, 2, 2));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
 
