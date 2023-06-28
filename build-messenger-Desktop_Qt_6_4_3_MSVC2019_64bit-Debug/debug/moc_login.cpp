@@ -8,6 +8,7 @@
 
 #include <memory>
 #include "../../messenger/login.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'login.h' doesn't include <QObject>."

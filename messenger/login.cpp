@@ -6,29 +6,8 @@
 #include "ID.h"
 #include <QtNetwork>
 
-QString response_code(QString Server_Response){
-    //seperating the code out of the respose of the server
-    QString searchString1 = "\"204\"";
-    QString searchString2 = "\"404\"";
-    QString searchString3 = "\"401\"";
-    QString searchString4 = "\"200\"";
-    if(Server_Response.contains(searchString1)){
-        return "204";
-    }
-    if(Server_Response.contains(searchString2)){
-        return "404";
-    }
-    if(Server_Response.contains(searchString3)){
-        return "401";
-    }
-    if(Server_Response.contains(searchString4)){
-        return "200";
-    }
-    else{
-        return "Error";
-    }
+QString response_code(QString Server_Response);
 
-}
 QString login_to_server(QString user,QString pass) {
     QString url1= "http://api.barafardayebehtar.ml:8080/login?username=";
     QString url2= "&password=";
