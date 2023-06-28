@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QToolButton>
 
@@ -26,6 +27,8 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
+    QPushButton *pushButton_5;
+    QLabel *label;
     QToolButton *toolButton;
     QPushButton *pushButton_4;
 
@@ -62,6 +65,12 @@ public:
 "background-color: rgb(0, 0, 127);\n"
 "}\n"
 "\n"
+"QLabel{\n"
+"color:white;\n"
+"border-radius:15px;\n"
+"font: 900 14pt \"Segoe UI Black\";\n"
+"}\n"
+"\n"
 ""));
         frame = new QFrame(Setting);
         frame->setObjectName("frame");
@@ -70,16 +79,23 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(32, 80, 531, 51));
+        pushButton->setGeometry(QRect(30, 130, 531, 51));
         pushButton_2 = new QPushButton(frame);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(30, 160, 531, 51));
+        pushButton_2->setGeometry(QRect(30, 200, 531, 51));
         pushButton_3 = new QPushButton(frame);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(30, 240, 531, 51));
+        pushButton_3->setGeometry(QRect(30, 270, 531, 51));
+        pushButton_5 = new QPushButton(frame);
+        pushButton_5->setObjectName("pushButton_5");
+        pushButton_5->setGeometry(QRect(30, 340, 531, 51));
+        label = new QLabel(frame);
+        label->setObjectName("label");
+        label->setGeometry(QRect(250, 50, 101, 41));
+        label->setAlignment(Qt::AlignCenter);
         toolButton = new QToolButton(Setting);
         toolButton->setObjectName("toolButton");
-        toolButton->setGeometry(QRect(340, 30, 121, 121));
+        toolButton->setGeometry(QRect(350, 30, 121, 121));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/new/prefix1/image/76716.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon);
@@ -103,6 +119,8 @@ public:
         pushButton->setText(QCoreApplication::translate("Setting", "Edit Profile", nullptr));
         pushButton_2->setText(QCoreApplication::translate("Setting", "New Group", nullptr));
         pushButton_3->setText(QCoreApplication::translate("Setting", "New Channel", nullptr));
+        pushButton_5->setText(QCoreApplication::translate("Setting", "Log Out", nullptr));
+        label->setText(QCoreApplication::translate("Setting", "Setting", nullptr));
         toolButton->setText(QString());
         pushButton_4->setText(QString());
     } // retranslateUi

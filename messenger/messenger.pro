@@ -11,25 +11,37 @@ CONFIG += c++17
 
 SOURCES += \
     chatpage.cpp \
+    editprofile.cpp \
     login.cpp \
+    logout.cpp \
     main.cpp \
     mainwindow.cpp \
+    newchannel.cpp \
+    newgroup.cpp \
     setting.cpp \
     signup.cpp
 
 HEADERS += \
     ID.h \
     chatpage.h \
+    editprofile.h \
     login.h \
+    logout.h \
     mainwindow.h \
+    newchannel.h \
+    newgroup.h \
     setting.h \
     signup.h \
     text_chat.h
 
 FORMS += \
     chatpage.ui \
+    editprofile.ui \
     login.ui \
+    logout.ui \
     mainwindow.ui \
+    newchannel.ui \
+    newgroup.ui \
     setting.ui \
     signup.ui
 

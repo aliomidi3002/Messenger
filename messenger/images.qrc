@@ -14,5 +14,11 @@
         <file>image/1500458.png</file>
         <file>image/free-file-icon-1453-thumb.png</file>
         <file>image/clip-icon.png</file>
+        <file>image/send_circle_icon_136236.png</file>
+        <file>image/3566345.png</file>
+        <file>image/126467.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>image/3566345.png</file>
     </qresource>
 </RCC>

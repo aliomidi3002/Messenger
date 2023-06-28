@@ -42,6 +42,12 @@ QPushButton:hover{
 background-color: rgb(0, 0, 127);
 }
 
+QLabel{
+color:white;
+border-radius:15px;
+font: 900 14pt &quot;Segoe UI Black&quot;;
+}
+
 </string>
   </property>
   <widget class="QFrame" name="frame">
@@ -62,8 +68,8 @@ background-color: rgb(0, 0, 127);
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>32</x>
-      <y>80</y>
+      <x>30</x>
+      <y>130</y>
       <width>531</width>
       <height>51</height>
      </rect>
@@ -76,7 +82,7 @@ background-color: rgb(0, 0, 127);
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>160</y>
+      <y>200</y>
       <width>531</width>
       <height>51</height>
      </rect>
@@ -89,7 +95,7 @@ background-color: rgb(0, 0, 127);
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>240</y>
+      <y>270</y>
       <width>531</width>
       <height>51</height>
      </rect>
@@ -98,11 +104,40 @@ background-color: rgb(0, 0, 127);
      <string>New Channel</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>340</y>
+      <width>531</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Log Out</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>50</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Setting</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>350</x>
      <y>30</y>
      <width>121</width>
      <height>121</height>

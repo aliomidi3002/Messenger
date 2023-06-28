@@ -3,6 +3,12 @@
 #include "ID.h"
 #include <QUrlQuery>
 #include <QtNetwork>
+#include "setting.h"
+#include <QKeyEvent>
+#include <QWidget>
+#include <QScrollArea>
+
+
 QString extractSubstring(const QString& original, QString& first, QString& second) {
     int firstPos = original.indexOf(first);
     if (firstPos == -1) {
@@ -181,6 +187,53 @@ void Chatpage::on_pushButton_clicked()
     Setting *set;
     set = new Setting(this);
     set->show();
-
 }
+
+
+
+void Chatpage::on_pushButton_2_clicked()
+{
+    // Get the text from the QTextEdit
+    QString text = ui->textEdit->toPlainText();
+
+    QLabel* label = new QLabel(text);
+    label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+    label->setAlignment(Qt::AlignLeft); // Align the text to the left
+
+    // Add a newline if the text length exceeds 60 characters
+    if (text.length() > 60) {
+        text.insert(60, "\n");
+        label->setText(text);
+    }
+
+    // Calculate the size of the label based on the number of new lines in the text
+    int labelHeight = 40 + (text.count('\n') * 20); // Adjust the height values as per your requirements
+
+    // Create a QListWidgetItem
+    QListWidgetItem* newItem = new QListWidgetItem();
+    newItem->setSizeHint(QSize(0, labelHeight)); // Set the size hint for the item
+
+    // Set the label as the item widget
+    ui->listWidget->addItem(newItem);
+    ui->listWidget->setItemWidget(newItem, label);
+
+    // Set the spacing between items
+    ui->listWidget->setSpacing(10); // Set the desired spacing (e.g., 10 pixels)
+
+    // Calculate the margin right value for the QListWidget::item
+    int marginRight = 740; // Initial margin-right value
+
+    // Update the margin-right value based on text length
+
+    QString styleSheet = QString("QListWidget::item { padding-left:5px; margin-left: 0; margin-right: 400; margin-bottom: 10px; }");
+    ui->listWidget->setStyleSheet(styleSheet);
+
+    // Scroll to the newly added item
+    ui->listWidget->scrollToBottom();
+
+    // Clear the text from the QTextEdit
+    ui->textEdit->clear();
+}
+
+
 

@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include "ID.h"
+#include <QTextEdit>
+#include "QVBoxLayout"
+#include <QKeyEvent>
 
 namespace Ui {
 class Chatpage;
@@ -17,13 +20,13 @@ public:
     ~Chatpage();
 
 private slots:
-
-
     void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Chatpage *ui;
     userID mCurrentUser;
+    QVBoxLayout* layout;
 };
 
 #endif // CHATPAGE_H
