@@ -9,6 +9,69 @@
 #include "newchat.h"
 #include "newgroup.h"
 #include "newchannel.h"
+struct MessageBlock;
+QVector<QString> getuserlist(QString token);
+//MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst);
+QVector<QString> getuserlist(QString token){
+    QString url1= "http://api.barafardayebehtar.ml:8080/getuserlist?token=";
+    url1=url1+token;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    QString first="There Are -";
+    QString second= "- Messages\"";
+    QString temp=response;
+    //qDebug()<<num<<"\n\n";
+    //qDebug() << response<<"\n\n\n";
+    QString serverResponse = response;
+
+    QVector<QString> names;
+
+    // Parse the JSON response
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(serverResponse.toUtf8());
+    if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+        QJsonObject jsonObj = jsonDoc.object();
+
+        // Find and extract the "block" objects
+        QStringList blockKeys = jsonObj.keys().filter("block ");
+        for (const QString& blockKey : blockKeys) {
+            QJsonObject blockObj = jsonObj[blockKey].toObject();
+            if (blockObj.contains("src")) {
+                names.append(blockObj["src"].toString());
+            }
+        }
+    }
+
+    return names;
+
+}
 
 QString logout(QString user,QString pass);
 QString response_code(QString Server_Response){
@@ -351,6 +414,7 @@ QString signup(QString user,QString pass) {
 }
 QString glob1;
 QString glob2;
+QString glob3;
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
@@ -360,8 +424,10 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
 
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
+    QString token = currentUser.getToken();
     glob1 = username;
     glob2 = password;
+    glob3 = token;
 
     ui->label->setText(username);
 }
@@ -417,10 +483,10 @@ void Chatpage::on_pushButton_2_clicked()
 
 void Chatpage::on_toolButton_5_clicked()
 {
-    NewChat chat;
-    chat.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    chat.setModal(true);
-    chat.exec();
+    NewChat *chat = new NewChat(this, glob3);
+    chat->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
+    chat->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
+    chat->show();
 }
 
 void Chatpage::on_toolButton_3_clicked()
