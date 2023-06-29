@@ -9,6 +9,10 @@
 #include "newchat.h"
 #include "newgroup.h"
 #include "newchannel.h"
+#include <QVector>
+#include <QTimer>
+#include <QThread>
+
 struct MessageBlock;
 QVector<QString> getuserlist(QString token);
 //MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst);
@@ -45,8 +49,6 @@ QVector<QString> getuserlist(QString token){
     // Clean up
     reply->deleteLater();
 
-    QString first="There Are -";
-    QString second= "- Messages\"";
     QString temp=response;
     //qDebug()<<num<<"\n\n";
     //qDebug() << response<<"\n\n\n";
@@ -415,21 +417,49 @@ QString signup(QString user,QString pass) {
 QString glob1;
 QString glob2;
 QString glob3;
+
+void Chatpage::showUsers()
+{
+    QVector<QString> user = getuserlist(glob3);
+    for(int i = user.size()-1 ; i >= 0; i--){
+        ui->listWidget_2->addItem(user[i]);
+    }
+
+}
+
+class myThread2: public QThread
+{
+public:
+    void run() override
+    {
+        while(true)
+        {
+            emit showUsers();
+            sleep(1);
+        }
+    }
+signals:
+    void showUsers();
+};
+
+
+
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
     mCurrentUser(currentUser)
 {
     ui->setupUi(this);
-
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
     QString token = currentUser.getToken();
     glob1 = username;
     glob2 = password;
     glob3 = token;
-
     ui->label->setText(username);
+
+    showUsers();
+
 }
 
 Chatpage::~Chatpage()

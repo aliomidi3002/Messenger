@@ -19,6 +19,9 @@ public:
     explicit Chatpage(QWidget *parent = nullptr, const userID& currentUser = userID());
     ~Chatpage();
 
+    void showUsers();
+
+
 private slots:
     void on_pushButton_2_clicked();
 

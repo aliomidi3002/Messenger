@@ -27,15 +27,11 @@ class Ui_signUp
 {
 public:
     QFrame *frame;
-    QLabel *label;
-    QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
     QLabel *label_6;
     QPushButton *pushButton;
-    QLineEdit *lineEdit_fn;
-    QLineEdit *lineEdit_ln;
     QLineEdit *lineEdit_u;
     QLineEdit *lineEdit_p;
     QLineEdit *lineEdit_c;
@@ -94,18 +90,6 @@ public:
         frame->setGeometry(QRect(160, 70, 491, 511));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
-        label = new QLabel(frame);
-        label->setObjectName("label");
-        label->setGeometry(QRect(30, 100, 131, 31));
-        label->setStyleSheet(QString::fromUtf8("color:white;\n"
-"border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
-        label_2 = new QLabel(frame);
-        label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(30, 170, 131, 31));
-        label_2->setStyleSheet(QString::fromUtf8("color:white;\n"
-"border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
         label_3 = new QLabel(frame);
         label_3->setObjectName("label_3");
         label_3->setGeometry(QRect(30, 240, 131, 31));
@@ -126,21 +110,14 @@ public:
 "font: 900 14pt \"Segoe UI Black\";"));
         label_6 = new QLabel(frame);
         label_6->setObjectName("label_6");
-        label_6->setGeometry(QRect(180, 70, 161, 31));
+        label_6->setGeometry(QRect(170, 70, 161, 31));
         label_6->setStyleSheet(QString::fromUtf8("color:white;\n"
 "border-radius:15px;\n"
 "font: 900 14pt \"Segoe UI Black\";"));
+        label_6->setAlignment(Qt::AlignCenter);
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(10, 460, 471, 41));
-        lineEdit_fn = new QLineEdit(frame);
-        lineEdit_fn->setObjectName("lineEdit_fn");
-        lineEdit_fn->setGeometry(QRect(30, 130, 391, 31));
-        lineEdit_fn->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        lineEdit_ln = new QLineEdit(frame);
-        lineEdit_ln->setObjectName("lineEdit_ln");
-        lineEdit_ln->setGeometry(QRect(30, 200, 391, 31));
-        lineEdit_ln->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
         lineEdit_u = new QLineEdit(frame);
         lineEdit_u->setObjectName("lineEdit_u");
         lineEdit_u->setGeometry(QRect(30, 270, 391, 31));
@@ -213,15 +190,11 @@ public:
     void retranslateUi(QDialog *signUp)
     {
         signUp->setWindowTitle(QCoreApplication::translate("signUp", "Dialog", nullptr));
-        label->setText(QCoreApplication::translate("signUp", "First Name", nullptr));
-        label_2->setText(QCoreApplication::translate("signUp", "Last Name", nullptr));
         label_3->setText(QCoreApplication::translate("signUp", "Username", nullptr));
         label_4->setText(QCoreApplication::translate("signUp", "Password", nullptr));
         label_5->setText(QCoreApplication::translate("signUp", "Confirm", nullptr));
         label_6->setText(QCoreApplication::translate("signUp", "SignUP here", nullptr));
         pushButton->setText(QCoreApplication::translate("signUp", "SignUp", nullptr));
-        lineEdit_fn->setPlaceholderText(QCoreApplication::translate("signUp", "First Name", nullptr));
-        lineEdit_ln->setPlaceholderText(QCoreApplication::translate("signUp", "Last Name", nullptr));
         lineEdit_u->setPlaceholderText(QCoreApplication::translate("signUp", "Username", nullptr));
         lineEdit_p->setPlaceholderText(QCoreApplication::translate("signUp", "Password", nullptr));
         lineEdit_c->setPlaceholderText(QCoreApplication::translate("signUp", "confirm", nullptr));

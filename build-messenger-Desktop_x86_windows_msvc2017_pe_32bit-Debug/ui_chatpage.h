@@ -47,6 +47,7 @@ public:
     QPushButton *pushButton_2;
     QTextEdit *textEdit;
     QListWidget *listWidget;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *Chatpage)
     {
@@ -134,6 +135,7 @@ public:
         listWidget_2 = new QListWidget(tab);
         listWidget_2->setObjectName("listWidget_2");
         listWidget_2->setGeometry(QRect(20, 60, 291, 411));
+        listWidget_2->setStyleSheet(QString::fromUtf8("color:red;"));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -258,6 +260,17 @@ public:
 "border-radius:15px;\n"
 "}\n"
 ""));
+        pushButton = new QPushButton(Chatpage);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(1140, 20, 31, 31));
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton:hover{\n"
+"background-color: rgb(255, 0, 0);\n"
+"}\n"
+""));
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/new/prefix1/image/7043665.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon7);
+        pushButton->setIconSize(QSize(30, 30));
 
         retranslateUi(Chatpage);
 
@@ -284,6 +297,7 @@ public:
         label_2->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
         pushButton_2->setText(QString());
         textEdit->setPlaceholderText(QCoreApplication::translate("Chatpage", "Write a message...", nullptr));
+        pushButton->setText(QString());
     } // retranslateUi
 
 };

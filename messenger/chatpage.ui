@@ -179,6 +179,9 @@ background-color: rgb(0, 0, 127);
         <height>411</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color:red;</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
