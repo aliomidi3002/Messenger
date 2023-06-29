@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include "ID.h"
 #include <QtNetwork>
+QString login_to_server(QString user,QString pass);
 QString response_code(QString Server_Response);
 QString signup_to_server(QString user,QString pass) {
 
@@ -116,85 +117,89 @@ void signUp::on_pushButton_clicked()
     QString Confirm_in   = ui->lineEdit_c->text();
 
 
-//    if(Username_in.size()<= 4){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Username Must Be More Than 4 Characters");
-//        return;
-//    }
+    if(Username_in.size()<= 2){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Username Must Be More Than 2 Characters");
+        return;
+    }
 
-//    if(Password_in.size()<= 4){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Password Must Be More Than 4 Characters");
-//        return;
-//    }
-
-
-//    if (Username_in.isEmpty()) {
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Enter Your Username");
-//        return;
-//    }
+    if(Password_in.size()<= 2){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Password Must Be More Than 2 Characters");
+        return;
+    }
 
 
-//    else if (Password_in.isEmpty()) {
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Enter Your Password");
-//        return;
-//    }
+    if (Username_in.isEmpty()) {
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Enter Your Username");
+        return;
+    }
 
 
-//    else if (Confirm_in.isEmpty()) {
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Confirm Your Password");
-//        return;
-//    }
+    else if (Password_in.isEmpty()) {
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Enter Your Password");
+        return;
+    }
 
-//    else if (Confirm_in != Password_in){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Confirm Your Password Correctly");
-//        return;
-//    }
+
+    else if (Confirm_in.isEmpty()) {
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Confirm Your Password");
+        return;
+    }
+
+    else if (Confirm_in != Password_in){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Confirm Your Password Correctly");
+        return;
+    }
 
 
     userID currentUser = userID(Username_in , Password_in);
 
     QString respons_signUp = signup_to_server(Username_in , Password_in);
 
-//    if(respons_signUp == "200"){
-//        hide();
-//        ChatPage = new Chatpage(this , currentUser);
-//        ChatPage->show();
-//    }
+    if(respons_signUp == "200"){
+        QString temp = login_to_server(Username_in,Password_in);
+        if(temp != "200" && temp != "300" && temp != "404" && temp != "204"){
+            currentUser.setToken(temp);
+            hide();
+            ChatPage = new Chatpage(this, currentUser);
+            ChatPage->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
+            ChatPage->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
+            ChatPage->show();
+        }
 
-//    else if(respons_signUp == "404"){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Connection lost! :(");
-//        return;
-//    }
+    }
 
-
-//    else if (respons_signUp == "204"){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("Username has already taken");
-//        return;
-//    }
-
-//    else if(respons_signUp == "401"){
-//        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-//        ui->label_7->setText("401?!");
-//        return;
-//    }
+    else if(respons_signUp == "404"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Connection lost! :(");
+        return;
+    }
 
 
-//    else if(respons_signUp == "300"){
-//        hide();
-//        ChatPage = new Chatpage(this , currentUser);
-//        ChatPage->show();
-//    }
+    else if (respons_signUp == "204"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("Username has already taken");
+        return;
+    }
 
-    hide();
-    ChatPage = new Chatpage(this , currentUser);
-    ChatPage->show();
+    else if(respons_signUp == "401"){
+        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
+        ui->label_7->setText("401?!");
+        return;
+    }
+
+
+    else if(respons_signUp == "300"){
+        hide();
+        ChatPage = new Chatpage(this , currentUser);
+        ChatPage->show();
+    }
+
 
 }
 // 200   موفق

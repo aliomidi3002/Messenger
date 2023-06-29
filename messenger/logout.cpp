@@ -1,7 +1,52 @@
 #include "logout.h"
 #include "ui_logout.h"
 #include <QMessageBox>
+#include <QUrlQuery>
+#include <QtNetwork>
 #include "mainwindow.h"
+QString response_code(QString Server_Response);
+QString logout(QString user,QString pass) {
+    QString url1= "http://api.barafardayebehtar.ml:8080/logout?username=";
+    QString url2= "&password=";
+
+    url1=url1+user+url2+pass;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+    QString response_code_login_server = response_code(response);
+    return response_code_login_server;
+
+}
 
 LogOut::LogOut(QWidget *parent) :
     QDialog(parent),

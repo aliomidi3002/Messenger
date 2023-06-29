@@ -103,17 +103,21 @@ public:
         toolButton->setIconSize(QSize(70, 70));
         pushButton = new QPushButton(NewGroup);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(20, 20, 61, 51));
+        pushButton->setGeometry(QRect(730, 20, 41, 41));
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton:hover{\n"
+"background-color: rgb(255, 0, 0);\n"
+"}\n"
+""));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/93634.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/7043665.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton->setIcon(icon1);
         pushButton->setIconSize(QSize(30, 30));
         listWidget = new QListWidget(NewGroup);
         listWidget->setObjectName("listWidget");
-        listWidget->setGeometry(QRect(195, 210, 461, 321));
+        listWidget->setGeometry(QRect(205, 210, 441, 321));
         pushButton_2 = new QPushButton(NewGroup);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(280, 540, 311, 41));
+        pushButton_2->setGeometry(QRect(270, 540, 311, 41));
 
         retranslateUi(NewGroup);
 

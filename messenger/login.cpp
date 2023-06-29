@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "ID.h"
 #include <QtNetwork>
+#include "chatpage.h"
 
 QString response_code(QString Server_Response);
 
@@ -127,13 +128,10 @@ void Login::on_pushButton_clicked()
     QString respons_login = login_to_server(Username , Password);
     userID currentUser = userID(Username , Password);
 
-    if(respons_login == "200"){
-        hide();
-        Chatpage* chatPage = new Chatpage(this, currentUser);
-        chatPage->show();
-    }
 
-    else if(respons_login == "404"){
+
+
+    if(respons_login == "404"){
         ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("Connection lost! :(");
         return;
@@ -157,6 +155,15 @@ void Login::on_pushButton_clicked()
         ui->label_4->setText("204?!!!");
         return;
     }
+    else if(respons_login != "200"){
+        currentUser.setToken(respons_login);
+        hide();
+        ChatPage = new Chatpage(this, currentUser);
+        ChatPage->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
+        ChatPage->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
+        ChatPage->show();
+    }
+
 }
 
 //hide();

@@ -5,7 +5,7 @@
 class userID{
     QString username;
     QString password;
-    //qstrign token
+    QString token;
 
 public:
     //constructor
@@ -14,15 +14,18 @@ public:
     userID(QString username , QString password){
         this->username = username;
         this->password = password;
+        token = nullptr;
     }
 
     // getters;
     QString getUsername() const{return username;}
     QString getPassword() const{return password;}
+    QString getToken() const{return token;}
 
     // settes
     void setUsername(QString username){this->username = username;}
     void setPassword(QString password){this->password = password;}
+    void setToken(QString token){this->token = token;}
 
     //current User
 };

@@ -10,7 +10,7 @@
 #include "newgroup.h"
 #include "newchannel.h"
 
-
+QString logout(QString user,QString pass);
 QString response_code(QString Server_Response){
     //seperating the code out of the respose of the server
     QString searchString1 = "\"204\"";
@@ -349,7 +349,8 @@ QString signup(QString user,QString pass) {
 
     return response_code(response);
 }
-
+QString glob1;
+QString glob2;
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
@@ -359,6 +360,8 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
 
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
+    glob1 = username;
+    glob2 = password;
 
     ui->label->setText(username);
 }
@@ -437,5 +440,14 @@ void Chatpage::on_toolButton_4_clicked()
     channel.setModal(true);
     channel.exec();
 
+}
+
+
+void Chatpage::on_pushButton_clicked()
+{
+    while(logout(glob1,glob2)!="200"){
+        ;
+    };
+    close();
 }
 

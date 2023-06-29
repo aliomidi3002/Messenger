@@ -63,42 +63,6 @@ border-bottom: 1px solid #717072
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>100</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:white;
-border-radius:15px;
-font: 900 14pt &quot;Segoe UI Black&quot;;</string>
-    </property>
-    <property name="text">
-     <string>First Name</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>170</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:white;
-border-radius:15px;
-font: 900 14pt &quot;Segoe UI Black&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Last Name</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
@@ -156,7 +120,7 @@ font: 900 14pt &quot;Segoe UI Black&quot;;</string>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>170</x>
       <y>70</y>
       <width>161</width>
       <height>31</height>
@@ -170,6 +134,9 @@ font: 900 14pt &quot;Segoe UI Black&quot;;</string>
     <property name="text">
      <string>SignUP here</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
@@ -182,38 +149,6 @@ font: 900 14pt &quot;Segoe UI Black&quot;;</string>
     </property>
     <property name="text">
      <string>SignUp</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_fn">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>130</y>
-      <width>391</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-    </property>
-    <property name="placeholderText">
-     <string>First Name</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_ln">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>200</y>
-      <width>391</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-    </property>
-    <property name="placeholderText">
-     <string>Last Name</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_u">
