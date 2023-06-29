@@ -7,6 +7,7 @@
 #include <QtNetwork>
 #include "chatpage.h"
 
+
 QString response_code(QString Server_Response);
 
 QString login_to_server(QString user,QString pass) {
