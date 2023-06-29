@@ -20,8 +20,13 @@ public:
     ~Chatpage();
 
 private slots:
-    void on_pushButton_clicked();
     void on_pushButton_2_clicked();
+
+    void on_toolButton_5_clicked();
+
+    void on_toolButton_3_clicked();
+
+    void on_toolButton_4_clicked();
 
 private:
     Ui::Chatpage *ui;

@@ -1,6 +1,5 @@
 #include "editprofile.h"
 #include "ui_editprofile.h"
-#include "setting.h"
 
 EditProfile::EditProfile(QWidget *parent) :
     QDialog(parent),
@@ -12,15 +11,6 @@ EditProfile::EditProfile(QWidget *parent) :
 EditProfile::~EditProfile()
 {
     delete ui;
-}
-
-void EditProfile::on_pushButton_2_clicked()
-{
-    close(); // Close the Login dialog
-    QWidget * Setting = parentWidget();
-    if (Setting) {
-        Setting->show(); // Show the main window
-    }
 }
 
 

@@ -103,9 +103,13 @@ public:
         toolButton->setIconSize(QSize(70, 704));
         pushButton = new QPushButton(NewChannel);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(20, 20, 61, 51));
+        pushButton->setGeometry(QRect(750, 20, 31, 31));
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton:hover{\n"
+"background-color: rgb(255, 0, 0);\n"
+"}\n"
+""));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/93634.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/7043665.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton->setIcon(icon1);
         pushButton->setIconSize(QSize(30, 30));
         listWidget = new QListWidget(NewChannel);

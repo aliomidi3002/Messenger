@@ -17,8 +17,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     newchannel.cpp \
+    newchat.cpp \
     newgroup.cpp \
-    setting.cpp \
     signup.cpp
 
 HEADERS += \
@@ -29,8 +29,8 @@ HEADERS += \
     logout.h \
     mainwindow.h \
     newchannel.h \
+    newchat.h \
     newgroup.h \
-    setting.h \
     signup.h \
     text_chat.h
 
@@ -41,8 +41,8 @@ FORMS += \
     logout.ui \
     mainwindow.ui \
     newchannel.ui \
+    newchat.ui \
     newgroup.ui \
-    setting.ui \
     signup.ui
 
 # Default rules for deployment.

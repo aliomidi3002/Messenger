@@ -3,10 +3,38 @@
 #include "ID.h"
 #include <QUrlQuery>
 #include <QtNetwork>
-#include "setting.h"
 #include <QKeyEvent>
 #include <QWidget>
 #include <QScrollArea>
+#include "newchat.h"
+#include "newgroup.h"
+#include "newchannel.h"
+
+
+QString response_code(QString Server_Response){
+    //seperating the code out of the respose of the server
+    QString searchString1 = "\"204\"";
+    QString searchString2 = "\"404\"";
+    QString searchString3 = "\"401\"";
+    QString searchString4 = "\"200\"";
+    if(Server_Response.contains(searchString1)){
+        return "204";
+    }
+    if(Server_Response.contains(searchString2)){
+        return "404";
+    }
+    if(Server_Response.contains(searchString3)){
+        return "401";
+    }
+    if(Server_Response.contains(searchString4)){
+        return "200";
+    }
+    else{
+        return "Error";
+    }
+
+}
+
 QString extractSubstring_for_extracting_the_chat_info(const QString& original, QString& first, QString& second) {
     int firstPos = original.indexOf(first);
     if (firstPos == -1) {
@@ -29,7 +57,6 @@ QString extractSubstring_for_extracting_the_chat_info(const QString& original, Q
     return remaining;
 }
 
-QString response_code(QString Server_Response);
 QString sendmessagegroup_chat_to_server(QString token,QString dst , QString body) {
     QString url1= "http://api.barafardayebehtar.ml:8080/sendmessagegroup?token=";
     QString url2= "&dst=";
@@ -159,12 +186,14 @@ QString sendmessagechannel_chat_to_server(QString token,QString dst , QString bo
 
     return response_code_login_server;
 }
+
 struct MessageBlock {
     QString src;
     QString dst;
     QString body;
     QString date;
 };
+
 QString findSubstringAndReturnRest(const QString& originalString, const QString& substring)
 {
     int index = originalString.indexOf(substring);
@@ -192,6 +221,7 @@ QString getStringBetweenLastTwoStrings(const QString& first, const QString& seco
     int length = thirdIndex - startIndex;
     return first.mid(startIndex, length);
 }
+
 MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst) {
     QString url1= "http://api.barafardayebehtar.ml:8080/getuserchats?token=";
     QString url2= "&dst=";
@@ -277,29 +307,6 @@ MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst) {
 
 }
 
-QString response_code(QString Server_Response){
-    //seperating the code out of the respose of the server
-    QString searchString1 = "\"204\"";
-    QString searchString2 = "\"404\"";
-    QString searchString3 = "\"401\"";
-    QString searchString4 = "\"200\"";
-    if(Server_Response.contains(searchString1)){
-        return "204";
-    }
-    if(Server_Response.contains(searchString2)){
-        return "404";
-    }
-    if(Server_Response.contains(searchString3)){
-        return "401";
-    }
-    if(Server_Response.contains(searchString4)){
-        return "200";
-    }
-    else{
-        return "Error";
-    }
-
-}
 QString signup(QString user,QString pass) {
 
     QString url1= "http://api.barafardayebehtar.ml:8080/signup?username=";
@@ -361,17 +368,6 @@ Chatpage::~Chatpage()
     delete ui;
 }
 
-
-void Chatpage::on_pushButton_clicked()
-{
-    hide();
-    Setting *set;
-    set = new Setting(this);
-    set->show();
-}
-
-
-
 void Chatpage::on_pushButton_2_clicked()
 {
     // Get the text from the QTextEdit
@@ -416,5 +412,30 @@ void Chatpage::on_pushButton_2_clicked()
     ui->textEdit->clear();
 }
 
+void Chatpage::on_toolButton_5_clicked()
+{
+    NewChat chat;
+    chat.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    chat.setModal(true);
+    chat.exec();
+}
 
+void Chatpage::on_toolButton_3_clicked()
+{
+
+    NewGroup group;
+    group.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    group.setModal(true);
+    group.exec();
+}
+
+
+void Chatpage::on_toolButton_4_clicked()
+{
+    NewChannel channel;
+    channel.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    channel.setModal(true);
+    channel.exec();
+
+}
 

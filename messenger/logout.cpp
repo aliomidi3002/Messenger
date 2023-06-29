@@ -45,15 +45,6 @@ void LogOut::on_pushButton_4_clicked()
 }
 
 
-void LogOut::on_pushButton_clicked()
-{
-    close(); // Close the Login dialog
-    QWidget * Setting = parentWidget();
-    if (Setting) {
-        Setting->show(); // Show the main window
-    }
-}
-
 
 void LogOut::on_pushButton_2_clicked()
 {
