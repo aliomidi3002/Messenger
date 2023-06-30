@@ -53,7 +53,7 @@ public:
             signUp->setObjectName("signUp");
         signUp->resize(800, 600);
         signUp->setStyleSheet(QString::fromUtf8("QDialog{\n"
-"background-image: url(:/new/prefix1/image/iStock-697020460-scaled.jpg);\n"
+"	background-image: url(:/new/prefix1/image/R14011_product.webp);\n"
 "}\n"
 "\n"
 "QFrame{\n"
@@ -64,12 +64,12 @@ public:
 "\n"
 "QToolButton{\n"
 "border-radius:60px;\n"
-"background-color: rgb(0, 85, 127);\n"
+"	background-color: rgb(0, 170, 255);\n"
 "}\n"
 "\n"
 "QPushButton{\n"
 "border-radius:15px;\n"
-"background-color: rgb(0, 85, 127);\n"
+"	background-color: rgb(0, 170, 255);\n"
 "font: 900 14pt \"Segoe UI Black\";\n"
 "}\n"
 "\n"
@@ -95,25 +95,29 @@ public:
         label_3->setGeometry(QRect(30, 240, 131, 31));
         label_3->setStyleSheet(QString::fromUtf8("color:white;\n"
 "border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
+"font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)"));
         label_4 = new QLabel(frame);
         label_4->setObjectName("label_4");
         label_4->setGeometry(QRect(30, 310, 131, 31));
         label_4->setStyleSheet(QString::fromUtf8("color:white;\n"
 "border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
+"font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)"));
         label_5 = new QLabel(frame);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(30, 380, 131, 31));
         label_5->setStyleSheet(QString::fromUtf8("color:white;\n"
 "border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
+"font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)"));
         label_6 = new QLabel(frame);
         label_6->setObjectName("label_6");
         label_6->setGeometry(QRect(170, 70, 161, 31));
         label_6->setStyleSheet(QString::fromUtf8("color:white;\n"
 "border-radius:15px;\n"
-"font: 900 14pt \"Segoe UI Black\";"));
+"font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)"));
         label_6->setAlignment(Qt::AlignCenter);
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
@@ -147,7 +151,8 @@ public:
         label_7 = new QLabel(frame);
         label_7->setObjectName("label_7");
         label_7->setGeometry(QRect(160, 110, 311, 31));
-        label_7->setStyleSheet(QString::fromUtf8(""));
+        label_7->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
+"font: 700 9pt \"Segoe UI\";"));
         label_7->setAlignment(Qt::AlignCenter);
         pushButton_4 = new QPushButton(signUp);
         pushButton_4->setObjectName("pushButton_4");
@@ -158,7 +163,7 @@ public:
         pushButton_4->setIconSize(QSize(30, 30));
         toolButton = new QToolButton(signUp);
         toolButton->setObjectName("toolButton");
-        toolButton->setGeometry(QRect(350, 10, 121, 121));
+        toolButton->setGeometry(QRect(350, 0, 121, 121));
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/new/prefix1/image/Sample_User_Icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon2);

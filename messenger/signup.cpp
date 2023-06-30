@@ -118,40 +118,34 @@ void signUp::on_pushButton_clicked()
 
 
     if(Username_in.size()<= 2){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Username Must Be More Than 2 Characters");
         return;
     }
 
     if(Password_in.size()<= 2){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Password Must Be More Than 2 Characters");
         return;
     }
 
 
     if (Username_in.isEmpty()) {
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Enter Your Username");
         return;
     }
 
 
     else if (Password_in.isEmpty()) {
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Enter Your Password");
         return;
     }
 
 
     else if (Confirm_in.isEmpty()) {
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Confirm Your Password");
         return;
     }
 
     else if (Confirm_in != Password_in){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Confirm Your Password Correctly");
         return;
     }
@@ -175,20 +169,16 @@ void signUp::on_pushButton_clicked()
     }
 
     else if(respons_signUp == "404"){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("Connection lost! :(");
         return;
     }
 
 
-    else if (respons_signUp == "204"){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
-        ui->label_7->setText("Username has already taken");
+    else if (respons_signUp == "204"){        ui->label_7->setText("Username has already taken");
         return;
     }
 
     else if(respons_signUp == "401"){
-        ui->label_7->setStyleSheet("color: rgb(255, 0, 0);font: 9pt");
         ui->label_7->setText("401?!");
         return;
     }

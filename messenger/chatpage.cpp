@@ -6,7 +6,6 @@
 #include <QKeyEvent>
 #include <QWidget>
 #include <QScrollArea>
-#include "newchat.h"
 #include "newgroup.h"
 #include "newchannel.h"
 #include <QVector>
@@ -414,22 +413,20 @@ QString signup(QString user,QString pass) {
 
     return response_code(response);
 }
-QString glob1;
-QString glob2;
-QString glob3;
+
+//uiCode////////////////////////////////////////////////////////////////////////////////////////////////////
+QString CurrentUsername;
+QString CurrentPassword;
+QString UserToken;
 
 void Chatpage::showUsers()
 {
-    QVector<QString> user = getuserlist(glob3);
+    QVector<QString> user = getuserlist(UserToken);
     for(int i = user.size()-1 ; i >= 0; i--){
         ui->listWidget_2->addItem(user[i]);
     }
 
 }
-
-
-
-
 
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
@@ -440,9 +437,9 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
     QString token = currentUser.getToken();
-    glob1 = username;
-    glob2 = password;
-    glob3 = token;
+    CurrentUsername = username;
+    CurrentPassword = password;
+    UserToken = token;
     ui->label->setText(username);
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
@@ -457,14 +454,14 @@ Chatpage::~Chatpage()
     delete ui;
 }
 
+// find user
 void Chatpage::on_toolButton_5_clicked()
 {
-    NewChat *chat = new NewChat(this, glob3);
-    chat->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
-    chat->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
-    chat->show();
+    QString username = ui->lineEdit->text();
+    sendmessageuser_chat_to_server(UserToken, username, "hi");
 }
 
+// find group
 void Chatpage::on_toolButton_3_clicked()
 {
     NewGroup group;
@@ -473,7 +470,7 @@ void Chatpage::on_toolButton_3_clicked()
     group.exec();
 }
 
-
+// find channel
 void Chatpage::on_toolButton_4_clicked()
 {
     NewChannel channel;
@@ -481,16 +478,18 @@ void Chatpage::on_toolButton_4_clicked()
     channel.setModal(true);
     channel.exec();
 }
+
+
+
 void Chatpage::show_chat()
 {
     QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
     QString user = selectedItem->text();
 
-    QVector<MessageBlock> chats = getuserchats_server_to_chat_display(glob3,user);
-    //delete[] chats;
-    int count = 0;
-    while(chats->body[count] != nullptr){
-        QString text = chats->body[count];
+    QVector<MessageBlock> chats = getuserchats_server_to_chat_display(UserToken,user);
+
+    for (int i = 0 ; i < chats.size(); i++) {
+        QString text = chats.at(i).body;
         QLabel* label = new QLabel(text);
         label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
         label->setAlignment(Qt::AlignLeft);
@@ -507,37 +506,21 @@ void Chatpage::show_chat()
         QString styleSheet = QString("QListWidget::item { padding-left:5px; margin-left: 0; margin-right: 400; margin-bottom: 10px; }");
         ui->listWidget->setStyleSheet(styleSheet);
         ui->listWidget->scrollToBottom();
-        ui->textEdit->clear();
-        count++;
     }
-
 }
 
 
 void Chatpage::on_pushButton_5_clicked()
 {
-
-    // Get the updated list of users
-    QVector<QString> updatedUsers = getuserlist(glob3);
-    //show_chat();
-    // Clear the list widget
+    QVector<QString> updatedUsers = getuserlist(UserToken);
     ui->listWidget_2->clear();
-
-    // Add the updated users in reverse order to show the most recent at the top
     for (int i = updatedUsers.size() - 1; i >= 0; --i) {
     ui->listWidget_2->addItem(updatedUsers[i]);
  }
 
-
 }
 
-
-// showing password to chat
-
-// sending message to server
-void Chatpage::on_pushButton_2_clicked()
-{
-    // Get the text from the QTextEdit
+void Chatpage::on_pushButton_2_clicked(){
     QString text = ui->textEdit->toPlainText();
 
     if(text == nullptr){
@@ -546,7 +529,8 @@ void Chatpage::on_pushButton_2_clicked()
 
     QListWidgetItem *selectedItem = ui ->listWidget_2->currentItem();
     if(selectedItem != nullptr){
-        sendmessageuser_chat_to_server(glob3,selectedItem->text(),text);
+        sendmessageuser_chat_to_server(UserToken,selectedItem->text(),text);
+        ui->textEdit->clear();
         show_chat();
     }
     else{
@@ -557,7 +541,7 @@ void Chatpage::on_pushButton_2_clicked()
 
 void Chatpage::on_pushButton_clicked()
 {
-    while(logout(glob1,glob2)!="200"){
+    while(logout(CurrentUsername,CurrentPassword)!="200"){
         ;
     };
     close();

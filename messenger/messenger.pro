@@ -17,7 +17,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     newchannel.cpp \
-    newchat.cpp \
     newgroup.cpp \
     signup.cpp
 
@@ -29,7 +28,6 @@ HEADERS += \
     logout.h \
     mainwindow.h \
     newchannel.h \
-    newchat.h \
     newgroup.h \
     signup.h \
     text_chat.h
@@ -41,7 +39,6 @@ FORMS += \
     logout.ui \
     mainwindow.ui \
     newchannel.ui \
-    newchat.ui \
     newgroup.ui \
     signup.ui
 

@@ -19,16 +19,7 @@ void NewChat::on_pushButton_clicked()
 
 void NewChat::on_pushButton_2_clicked()
 {
-    QString username = ui->lineEdit->text();
 
-    if (username.isEmpty()) {
-        ui->label_2->setStyleSheet("color: red;");
-        ui->label_2->setText("Username Is Empty");
-        return;
-    }
-
-    QString t = "hi";
-    QString temp = sendmessageuser_chat_to_server(m_token, username, t);
     hide();
     return;
 }

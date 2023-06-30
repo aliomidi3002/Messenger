@@ -115,13 +115,11 @@ void Login::on_pushButton_clicked()
     QString Password = ui->lineEdit_p->text();
 
     if(Username.isEmpty()){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("Enter Your Username");
         return;
     }
 
     else if(Password.isEmpty()){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("Enter Your Password");
         return;
     }
@@ -133,26 +131,22 @@ void Login::on_pushButton_clicked()
 
 
     if(respons_login == "404"){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("Connection lost! :(");
         return;
     }
 
     else if(respons_login == "401"){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("Informations Is Incorrect");
         return;
     }
 
 
     else if(respons_login == "300"){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("You already loged in");
         return;
     }
 
     else if(respons_login == "204"){
-        ui->label_4->setStyleSheet("color: rgb(255,0, 0);font: 9pt");
         ui->label_4->setText("204?!!!");
         return;
     }
