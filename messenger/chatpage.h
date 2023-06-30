@@ -33,11 +33,7 @@ private slots:
 
     void on_pushButton_clicked();
 
-<<<<<<< HEAD
-    void show_chat();
-=======
     void on_pushButton_5_clicked();
->>>>>>> c24d97135a4c0e09db37fa77065f21d1e50766ae
 
 private:
     Ui::Chatpage *ui;
