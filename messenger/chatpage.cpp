@@ -467,10 +467,51 @@ Chatpage::~Chatpage()
     delete ui;
 }
 
+void Chatpage::on_toolButton_5_clicked()
+{
+    NewChat *chat = new NewChat(this, glob3);
+    chat->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
+    chat->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
+    chat->show();
+}
+
+void Chatpage::on_toolButton_3_clicked()
+{
+
+    NewGroup group;
+    group.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    group.setModal(true);
+    group.exec();
+}
+
+
+void Chatpage::on_toolButton_4_clicked()
+{
+    NewChannel channel;
+    channel.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    channel.setModal(true);
+    channel.exec();
+
+}
+
+
+void Chatpage::on_pushButton_clicked()
+{
+    while(logout(glob1,glob2)!="200"){
+        ;
+    };
+    close();
+}
+
+
 void Chatpage::on_pushButton_2_clicked()
 {
     // Get the text from the QTextEdit
     QString text = ui->textEdit->toPlainText();
+
+    if(text == nullptr){
+        return;
+    }
 
     QLabel* label = new QLabel(text);
     label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
@@ -511,39 +552,14 @@ void Chatpage::on_pushButton_2_clicked()
     ui->textEdit->clear();
 }
 
-void Chatpage::on_toolButton_5_clicked()
+
+void Chatpage::show_chat()
 {
-    NewChat *chat = new NewChat(this, glob3);
-    chat->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::Window | Qt::FramelessWindowHint);
-    chat->setAttribute(Qt::WA_DeleteOnClose); // Optional: Delete the window when closed
-    chat->show();
-}
+    QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
+    QString user = selectedItem->text();
+    MessageBlock *chats;
+    chats = getuserchats_server_to_chat_display(glob3,user);
 
-void Chatpage::on_toolButton_3_clicked()
-{
-
-    NewGroup group;
-    group.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    group.setModal(true);
-    group.exec();
-}
-
-
-void Chatpage::on_toolButton_4_clicked()
-{
-    NewChannel channel;
-    channel.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    channel.setModal(true);
-    channel.exec();
-
-}
-
-
-void Chatpage::on_pushButton_clicked()
-{
-    while(logout(glob1,glob2)!="200"){
-        ;
-    };
-    close();
+    int count = 0;
 }
 
