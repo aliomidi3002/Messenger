@@ -221,6 +221,7 @@ release\qrc_images.cpp: ..\messenger\images.qrc \
 		..\messenger\image\126467.png \
 		..\messenger\image\search-icon.png \
 		..\messenger\image\emoji-smile-icon-symbol-on-yellow-background-smiley-face-cartoon-character-wallpaper-vector.jpg \
+		..\messenger\image\user-icon-2048x2048-ihoxz4vq.png \
 		..\messenger\image\hd-settings-black-line-icon-png-11640542802zybarymqkq.png \
 		..\messenger\image\free-file-icon-1453-thumb.png \
 		..\messenger\image\3566345.png \
@@ -1884,6 +1885,8 @@ release\chatpage.obj: ..\messenger\chatpage.cpp ..\messenger\chatpage.h \
 		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\QLabel \
 		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\qlabel.h \
 		C:\Qt\6.5.1\msvc2019_64\include\QtGui\qpicture.h \
+		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\QLineEdit \
+		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\qlineedit.h \
 		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\QListWidget \
 		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\qlistwidget.h \
 		C:\Qt\6.5.1\msvc2019_64\include\QtWidgets\qlistview.h \

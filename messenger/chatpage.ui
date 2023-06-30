@@ -148,7 +148,7 @@ font: 700 12pt &quot;Segoe UI&quot;;
 </string>
    </property>
    <property name="text">
-    <string>Username</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -245,8 +245,8 @@ background-color: rgb(255, 0, 0);
    </property>
    <property name="iconSize">
     <size>
-     <width>30</width>
-     <height>30</height>
+     <width>25</width>
+     <height>25</height>
     </size>
    </property>
   </widget>
@@ -338,7 +338,9 @@ background-color: rgb(0, 0, 127);
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgba(0,0,0,0.6);
-border-radius:15px;</string>
+border-radius:15px;
+font: 700 18pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit">

@@ -440,11 +440,11 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     CurrentUsername = username;
     CurrentPassword = password;
     UserToken = token;
+
     ui->label->setText(username);
+
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
-
-    // Start the timer to trigger the timeout event every 2 seconds
     timer->start(2000);
 
 }
@@ -481,10 +481,8 @@ void Chatpage::on_toolButton_4_clicked()
 
 
 
-void Chatpage::show_chat()
+void Chatpage::show_chat(QString user)
 {
-    QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
-    QString user = selectedItem->text();
 
     QVector<MessageBlock> chats = getuserchats_server_to_chat_display(UserToken,user);
 
@@ -515,27 +513,21 @@ void Chatpage::on_pushButton_5_clicked()
     QVector<QString> updatedUsers = getuserlist(UserToken);
     ui->listWidget_2->clear();
     for (int i = updatedUsers.size() - 1; i >= 0; --i) {
-    ui->listWidget_2->addItem(updatedUsers[i]);
- }
-
+        ui->listWidget_2->addItem(updatedUsers[i]);
+    }
 }
 
 void Chatpage::on_pushButton_2_clicked(){
-    QString text = ui->textEdit->toPlainText();
 
+    QString name = ui->label_2->text();
+    QString text = ui->textEdit->toPlainText();
     if(text == nullptr){
         return;
     }
+    sendmessageuser_chat_to_server(UserToken,name,text);
+    ui->textEdit->clear();
+    show_chat(name);
 
-    QListWidgetItem *selectedItem = ui ->listWidget_2->currentItem();
-    if(selectedItem != nullptr){
-        sendmessageuser_chat_to_server(UserToken,selectedItem->text(),text);
-        ui->textEdit->clear();
-        show_chat();
-    }
-    else{
-        return;
-    }
 }
 
 
@@ -545,5 +537,12 @@ void Chatpage::on_pushButton_clicked()
         ;
     };
     close();
+}
+
+void Chatpage::on_listWidget_2_itemClicked(QListWidgetItem *item)
+{
+    QString name = item->text();
+    ui->label_2->setText(name);
+    show_chat(name);
 }
 

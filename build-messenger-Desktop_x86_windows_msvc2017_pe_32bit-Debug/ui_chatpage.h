@@ -166,7 +166,7 @@ public:
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/new/prefix1/image/7043665.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton->setIcon(icon4);
-        pushButton->setIconSize(QSize(30, 30));
+        pushButton->setIconSize(QSize(25, 25));
         pushButton_5 = new QPushButton(Chatpage);
         pushButton_5->setObjectName("pushButton_5");
         pushButton_5->setGeometry(QRect(1030, 20, 41, 31));
@@ -201,7 +201,9 @@ public:
         listWidget_2->setObjectName("listWidget_2");
         listWidget_2->setGeometry(QRect(10, 60, 311, 411));
         listWidget_2->setStyleSheet(QString::fromUtf8("background-color: rgba(0,0,0,0.6);\n"
-"border-radius:15px;"));
+"border-radius:15px;\n"
+"font: 700 18pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);"));
         lineEdit = new QLineEdit(tab);
         lineEdit->setObjectName("lineEdit");
         lineEdit->setGeometry(QRect(60, 17, 261, 31));
@@ -312,7 +314,7 @@ public:
         pushButton_3->setText(QString());
         pushButton_4->setText(QString());
         toolButton_2->setText(QString());
-        label_2->setText(QCoreApplication::translate("Chatpage", "Username", nullptr));
+        label_2->setText(QString());
         pushButton_2->setText(QString());
         textEdit->setPlaceholderText(QCoreApplication::translate("Chatpage", "Write a message...", nullptr));
         pushButton->setText(QString());
