@@ -45,8 +45,8 @@ static constexpr auto qt_meta_stringdata_CLASSChatpageENDCLASS = QtMocHelpers::s
     "on_toolButton_5_clicked",
     "on_toolButton_3_clicked",
     "on_toolButton_4_clicked",
-    "on_pushButton_clicked",
-    "show_chat"
+    "show_chat",
+    "on_pushButton_5_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSChatpageENDCLASS_t {
@@ -57,8 +57,8 @@ struct qt_meta_stringdata_CLASSChatpageENDCLASS_t {
     char stringdata3[24];
     char stringdata4[24];
     char stringdata5[24];
-    char stringdata6[22];
-    char stringdata7[10];
+    char stringdata6[10];
+    char stringdata7[24];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSChatpageENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -70,8 +70,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSChatpageENDCLASS_t qt_meta_stri
         QT_MOC_LITERAL(34, 23),  // "on_toolButton_5_clicked"
         QT_MOC_LITERAL(58, 23),  // "on_toolButton_3_clicked"
         QT_MOC_LITERAL(82, 23),  // "on_toolButton_4_clicked"
-        QT_MOC_LITERAL(106, 21),  // "on_pushButton_clicked"
-        QT_MOC_LITERAL(128, 9)   // "show_chat"
+        QT_MOC_LITERAL(106, 9),  // "show_chat"
+        QT_MOC_LITERAL(116, 23)   // "on_pushButton_5_clicked"
     },
     "Chatpage",
     "on_pushButton_2_clicked",
@@ -79,8 +79,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSChatpageENDCLASS_t qt_meta_stri
     "on_toolButton_5_clicked",
     "on_toolButton_3_clicked",
     "on_toolButton_4_clicked",
-    "on_pushButton_clicked",
-    "show_chat"
+    "show_chat",
+    "on_pushButton_5_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -135,9 +135,9 @@ Q_CONSTINIT const QMetaObject Chatpage::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_toolButton_4_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pushButton_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'show_chat'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_pushButton_5_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -153,8 +153,8 @@ void Chatpage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->on_toolButton_5_clicked(); break;
         case 2: _t->on_toolButton_3_clicked(); break;
         case 3: _t->on_toolButton_4_clicked(); break;
-        case 4: _t->on_pushButton_clicked(); break;
-        case 5: _t->show_chat(); break;
+        case 4: _t->show_chat(); break;
+        case 5: _t->on_pushButton_5_clicked(); break;
         default: ;
         }
     }

@@ -31,9 +31,9 @@ private slots:
 
     void on_toolButton_4_clicked();
 
-    void on_pushButton_clicked();
-
     void show_chat();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::Chatpage *ui;

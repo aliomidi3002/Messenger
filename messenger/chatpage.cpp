@@ -477,7 +477,6 @@ void Chatpage::on_toolButton_5_clicked()
 
 void Chatpage::on_toolButton_3_clicked()
 {
-
     NewGroup group;
     group.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     group.setModal(true);
@@ -491,11 +490,10 @@ void Chatpage::on_toolButton_4_clicked()
     channel.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     channel.setModal(true);
     channel.exec();
-
 }
 
 
-void Chatpage::on_pushButton_clicked()
+void Chatpage::on_pushButton_5_clicked()
 {
     while(logout(glob1,glob2)!="200"){
         ;
