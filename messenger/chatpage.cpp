@@ -437,8 +437,12 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     glob2 = password;
     glob3 = token;
     ui->label->setText(username);
+    QTimer* timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
 
-    showUsers();
+    // Start the timer to trigger the timeout event every 2 seconds
+    timer->start(2000);
+    //showUsers();
 
 }
 
@@ -536,9 +540,31 @@ void Chatpage::showUsers()
 
 }
 
+
 void Chatpage::on_pushButton_5_clicked()
 {
-    ui->listWidget_2->clear();
-    showUsers();
+    // Clear the selection in the list widget
+    ui->listWidget_2->clearSelection();
+
+    // Get the current items in the list widget
+    QList<QListWidgetItem *> currentItems = ui->listWidget_2->findItems("*", Qt::MatchWildcard);
+
+    // Get the updated list of users
+    QVector<QString> updatedUsers = getuserlist(glob3);
+
+    // Iterate over the current items and remove any that are not in the updated list
+    for (QListWidgetItem *item : currentItems) {
+        if (!updatedUsers.contains(item->text())) {
+            delete ui->listWidget_2->takeItem(ui->listWidget_2->row(item));
+        }
+    }
+
+    // Iterate over the updated list of users and add any that are not already in the list
+    for (const QString& user : updatedUsers) {
+        QList<QListWidgetItem *> matchingItems = ui->listWidget_2->findItems(user, Qt::MatchExactly);
+        if (matchingItems.isEmpty()) {
+            ui->listWidget_2->addItem(user);
+        }
+    }
 }
 
