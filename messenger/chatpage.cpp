@@ -287,16 +287,13 @@ QString getStringBetweenLastTwoStrings(const QString& first, const QString& seco
     return first.mid(startIndex, length);
 }
 
-MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst) {
+QVector<MessageBlock> getuserchats_server_to_chat_display(QString token,QString dst) {
     QString url1= "http://api.barafardayebehtar.ml:8080/getuserchats?token=";
     QString url2= "&dst=";
+
     url1=url1+token+url2+dst;
     QUrl url(url1);
-    /*
-    QUrl url2("&password=");
-    url = url.resolved(user1);
-    url = url.resolved(url2);
-    url = url.resolved(pass1);*/
+
     // Create a QNetworkAccessManager object
     QNetworkAccessManager manager;
 
@@ -319,57 +316,60 @@ MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst) {
         response = QString(responseData);
     } else {
         // Handle error cases
-        qDebug() << "Error:" << reply->errorString();
+        //qDebug() << "Error:" << reply->errorString();
     }
 
     // Clean up
     reply->deleteLater();
 
-    QString first="There Are -";
-    QString second= "- Messages\"";
-    QString temp=response;
-    int num=getStringBetweenLastTwoStrings(temp,first,second).toInt(),i=0;
-    //qDebug()<<num<<"\n\n";
-    MessageBlock* answer_to_the_chat_info = new MessageBlock[num];
-    //qDebug() << response<<"\n\n\n";
-    QString serverResponse = response;
+
+    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
 
     // Parse the JSON response
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(serverResponse.toUtf8());
-    if (!jsonResponse.isNull() && jsonResponse.isObject()) {
-        QJsonObject rootObject = jsonResponse.object();
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
 
-        // Iterate over each block
-        for (const QString& key : rootObject.keys()) {
-            if (key.startsWith("block ")) {
-                QJsonObject blockObject = rootObject.value(key).toObject();
+    if (!jsonResponse.isNull()) {
+        if (jsonResponse.isObject()) {
+            QJsonObject jsonObject = jsonResponse.object();
 
-                // Extract values and store in struct
+            // Extract the "message" and "code" values
+            QString message = jsonObject["message"].toString();
+            QString code = jsonObject["code"].toString();
 
-                answer_to_the_chat_info[i].src = blockObject.value("src").toString();
-                answer_to_the_chat_info[i].dst = blockObject.value("dst").toString();
-                answer_to_the_chat_info[i].body = blockObject.value("body").toString();
-                answer_to_the_chat_info[i].date = blockObject.value("date").toString();
+            qDebug() << "Message: " << message;
+            qDebug() << "Code: " << code;
 
-                // Print the values for verification
-                //qDebug() << "Block" << key;
-                //qDebug() << "Source:" << answer_to_the_chat_info[i].src;
-                //qDebug() << "Destination:" << answer_to_the_chat_info[i].dst;
-                //qDebug() << "Body:" << answer_to_the_chat_info[i].body;
-                //qDebug() << "Date:" << answer_to_the_chat_info[i].date;
-                i++;
+            // Iterate over the blocks
+            QJsonObject::iterator it;
+            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+                QString key = it.key();
+                if (key.startsWith("block")) {
+                    QJsonObject blockObject = it.value().toObject();
+
+                    // Extract values from each block
+                    QString body = blockObject["body"].toString();
+                    QString src = blockObject["src"].toString();
+                    QString dst = blockObject["dst"].toString();
+                    QString date = blockObject["date"].toString();
+
+                    // Create a MessageBlock struct and store it in the array
+                    MessageBlock block;
+                    block.src = src;
+                    block.dst = dst;
+                    block.body = body;
+                    block.date = date;
+
+                    messageBlocks.append(block);
+                }
             }
+        } else {
+            qDebug() << "Invalid JSON response: Not an object";
         }
+    } else {
+        qDebug() << "Invalid JSON response: Failed to parse";
     }
 
-    //qDebug() <<"\n\n\n"<< response;
-    //qDebug() <<"238476874682374\tefwwwe\twr";
-    return answer_to_the_chat_info;
-
-
-
-    //extractJsonValue(responseData,"bo")
-
+    return messageBlocks;
 }
 
 QString signup(QString user,QString pass) {
@@ -427,20 +427,7 @@ void Chatpage::showUsers()
 
 }
 
-class myThread2: public QThread
-{
-public:
-    void run() override
-    {
-        while(true)
-        {
-            emit showUsers();
-            sleep(1);
-        }
-    }
-signals:
-    void showUsers();
-};
+
 
 
 
@@ -457,8 +444,11 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     glob2 = password;
     glob3 = token;
     ui->label->setText(username);
+    QTimer* timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
 
-    showUsers();
+    // Start the timer to trigger the timeout event every 2 seconds
+    timer->start(2000);
 
 }
 
@@ -491,25 +481,13 @@ void Chatpage::on_toolButton_4_clicked()
     channel.setModal(true);
     channel.exec();
 }
-
-
-void Chatpage::on_pushButton_5_clicked()
-{
-    while(logout(glob1,glob2)!="200"){
-        ;
-    };
-    close();
-}
-
-
-// showing password to chat
 void Chatpage::show_chat()
 {
     QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
     QString user = selectedItem->text();
-    MessageBlock *chats;
-    chats = getuserchats_server_to_chat_display(glob3,user);
 
+    QVector<MessageBlock> chats = getuserchats_server_to_chat_display(glob3,user);
+    //delete[] chats;
     int count = 0;
     while(chats->body[count] != nullptr){
         QString text = chats->body[count];
@@ -535,6 +513,27 @@ void Chatpage::show_chat()
 
 }
 
+
+void Chatpage::on_pushButton_5_clicked()
+{
+
+    // Get the updated list of users
+    QVector<QString> updatedUsers = getuserlist(glob3);
+    //show_chat();
+    // Clear the list widget
+    ui->listWidget_2->clear();
+
+    // Add the updated users in reverse order to show the most recent at the top
+    for (int i = updatedUsers.size() - 1; i >= 0; --i) {
+    ui->listWidget_2->addItem(updatedUsers[i]);
+ }
+
+
+}
+
+
+// showing password to chat
+
 // sending message to server
 void Chatpage::on_pushButton_2_clicked()
 {
@@ -553,5 +552,14 @@ void Chatpage::on_pushButton_2_clicked()
     else{
         return;
     }
+}
+
+
+void Chatpage::on_pushButton_clicked()
+{
+    while(logout(glob1,glob2)!="200"){
+        ;
+    };
+    close();
 }
 
