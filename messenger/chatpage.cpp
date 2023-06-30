@@ -1,4 +1,3 @@
-#include <QMainWindow>
 #include "chatpage.h"
 #include "ui_chatpage.h"
 #include "ID.h"
@@ -13,7 +12,6 @@
 #include <QVector>
 #include <QTimer>
 #include <QThread>
-#include <QListWidget>
 
 struct MessageBlock;
 QVector<QString> getuserlist(QString token);
@@ -420,15 +418,37 @@ QString glob1;
 QString glob2;
 QString glob3;
 
+void Chatpage::showUsers()
+{
+    QVector<QString> user = getuserlist(glob3);
+    for(int i = user.size()-1 ; i >= 0; i--){
+        ui->listWidget_2->addItem(user[i]);
+    }
+
+}
+
+class myThread2: public QThread
+{
+public:
+    void run() override
+    {
+        while(true)
+        {
+            emit showUsers();
+            sleep(1);
+        }
+    }
+signals:
+    void showUsers();
+};
+
+
+
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
     mCurrentUser(currentUser)
 {
-    // Create a QTimer object------------------------------------------------------------------------------------
-    // Create and configure the QTimer
-
-    //----------------------------------------------------------------------------------------------------------
     ui->setupUi(this);
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
@@ -437,12 +457,8 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     glob2 = password;
     glob3 = token;
     ui->label->setText(username);
-    QTimer* timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
 
-    // Start the timer to trigger the timeout event every 2 seconds
-    timer->start(2000);
-    //showUsers();
+    showUsers();
 
 }
 
@@ -488,6 +504,40 @@ void Chatpage::on_pushButton_clicked()
 }
 
 
+// showing password to chat
+void Chatpage::show_chat()
+{
+    QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
+    QString user = selectedItem->text();
+    MessageBlock *chats;
+    chats = getuserchats_server_to_chat_display(glob3,user);
+
+    int count = 0;
+    while(chats->body[count] != nullptr){
+        QString text = chats->body[count];
+        QLabel* label = new QLabel(text);
+        label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+        label->setAlignment(Qt::AlignLeft);
+        if (text.length() > 60) {
+            text.insert(60, "\n");
+            label->setText(text);
+        }
+        int labelHeight = 40 + (text.count('\n') * 20);
+        QListWidgetItem* newItem = new QListWidgetItem();
+        newItem->setSizeHint(QSize(0, labelHeight));
+        ui->listWidget->addItem(newItem);
+        ui->listWidget->setItemWidget(newItem, label);
+        ui->listWidget->setSpacing(10);
+        QString styleSheet = QString("QListWidget::item { padding-left:5px; margin-left: 0; margin-right: 400; margin-bottom: 10px; }");
+        ui->listWidget->setStyleSheet(styleSheet);
+        ui->listWidget->scrollToBottom();
+        ui->textEdit->clear();
+        count++;
+    }
+
+}
+
+// sending message to server
 void Chatpage::on_pushButton_2_clicked()
 {
     // Get the text from the QTextEdit
@@ -497,90 +547,13 @@ void Chatpage::on_pushButton_2_clicked()
         return;
     }
 
-    QLabel* label = new QLabel(text);
-    label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
-    label->setAlignment(Qt::AlignLeft); // Align the text to the left
-
-    // Add a newline if the text length exceeds 60 characters
-    if (text.length() > 60) {
-        text.insert(60, "\n");
-        label->setText(text);
+    QListWidgetItem *selectedItem = ui ->listWidget_2->currentItem();
+    if(selectedItem != nullptr){
+        sendmessageuser_chat_to_server(glob3,selectedItem->text(),text);
+        show_chat();
     }
-
-    // Calculate the size of the label based on the number of new lines in the text
-    int labelHeight = 40 + (text.count('\n') * 20); // Adjust the height values as per your requirements
-
-    // Create a QListWidgetItem
-    QListWidgetItem* newItem = new QListWidgetItem();
-    newItem->setSizeHint(QSize(0, labelHeight)); // Set the size hint for the item
-
-    // Set the label as the item widget
-    ui->listWidget->addItem(newItem);
-    ui->listWidget->setItemWidget(newItem, label);
-
-    // Set the spacing between items
-    ui->listWidget->setSpacing(10); // Set the desired spacing (e.g., 10 pixels)
-
-    // Calculate the margin right value for the QListWidget::item
-    int marginRight = 740; // Initial margin-right value
-
-    // Update the margin-right value based on text length
-
-    QString styleSheet = QString("QListWidget::item { padding-left:5px; margin-left: 0; margin-right: 400; margin-bottom: 10px; }");
-    ui->listWidget->setStyleSheet(styleSheet);
-
-    // Scroll to the newly added item
-    ui->listWidget->scrollToBottom();
-
-    // Clear the text from the QTextEdit
-    ui->textEdit->clear();
-}
-
-
-void Chatpage::show_chat()
-{
-    QListWidgetItem *selectedItem = ui->listWidget_2->currentItem();
-    QString user = selectedItem->text();
-    MessageBlock *chats;
-    chats = getuserchats_server_to_chat_display(glob3,user);
-
-    int count = 0;
-}
-
-void Chatpage::showUsers()
-{
-    QVector<QString> user = getuserlist(glob3);
-    for(int i = user.size()-1 ; i >= 0; i--){
-        ui->listWidget_2->addItem(user[i]);
-    }
-
-}
-
-
-void Chatpage::on_pushButton_5_clicked()
-{
-    // Clear the selection in the list widget
-    ui->listWidget_2->clearSelection();
-
-    // Get the current items in the list widget
-    QList<QListWidgetItem *> currentItems = ui->listWidget_2->findItems("*", Qt::MatchWildcard);
-
-    // Get the updated list of users
-    QVector<QString> updatedUsers = getuserlist(glob3);
-
-    // Iterate over the current items and remove any that are not in the updated list
-    for (QListWidgetItem *item : currentItems) {
-        if (!updatedUsers.contains(item->text())) {
-            delete ui->listWidget_2->takeItem(ui->listWidget_2->row(item));
-        }
-    }
-
-    // Iterate over the updated list of users and add any that are not already in the list
-    for (const QString& user : updatedUsers) {
-        QList<QListWidgetItem *> matchingItems = ui->listWidget_2->findItems(user, Qt::MatchExactly);
-        if (matchingItems.isEmpty()) {
-            ui->listWidget_2->addItem(user);
-        }
+    else{
+        return;
     }
 }
 
