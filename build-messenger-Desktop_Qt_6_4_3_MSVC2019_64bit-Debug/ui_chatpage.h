@@ -34,6 +34,7 @@ public:
     QWidget *tab;
     QToolButton *toolButton_5;
     QListWidget *listWidget_2;
+    QPushButton *pushButton_5;
     QWidget *tab_2;
     QToolButton *toolButton_3;
     QListWidget *listWidget_4;
@@ -135,6 +136,11 @@ public:
         listWidget_2 = new QListWidget(tab);
         listWidget_2->setObjectName("listWidget_2");
         listWidget_2->setGeometry(QRect(20, 60, 291, 411));
+        listWidget_2->setStyleSheet(QString::fromUtf8("color:red;"));
+        pushButton_5 = new QPushButton(tab);
+        pushButton_5->setObjectName("pushButton_5");
+        pushButton_5->setGeometry(QRect(270, 10, 41, 31));
+        pushButton_5->setStyleSheet(QString::fromUtf8("color:white"));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -285,6 +291,7 @@ public:
         toolButton->setText(QString());
         label->setText(QString());
         toolButton_5->setText(QString());
+        pushButton_5->setText(QCoreApplication::translate("Chatpage", "refresh", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("Chatpage", "Chat", nullptr));
         toolButton_3->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("Chatpage", "Group", nullptr));

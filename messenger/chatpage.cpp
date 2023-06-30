@@ -1,3 +1,4 @@
+#include <QMainWindow>
 #include "chatpage.h"
 #include "ui_chatpage.h"
 #include "ID.h"
@@ -12,6 +13,7 @@
 #include <QVector>
 #include <QTimer>
 #include <QThread>
+#include <QListWidget>
 
 struct MessageBlock;
 QVector<QString> getuserlist(QString token);
@@ -418,37 +420,15 @@ QString glob1;
 QString glob2;
 QString glob3;
 
-void Chatpage::showUsers()
-{
-    QVector<QString> user = getuserlist(glob3);
-    for(int i = user.size()-1 ; i >= 0; i--){
-        ui->listWidget_2->addItem(user[i]);
-    }
-
-}
-
-class myThread2: public QThread
-{
-public:
-    void run() override
-    {
-        while(true)
-        {
-            emit showUsers();
-            sleep(1);
-        }
-    }
-signals:
-    void showUsers();
-};
-
-
-
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
     mCurrentUser(currentUser)
 {
+    // Create a QTimer object------------------------------------------------------------------------------------
+    // Create and configure the QTimer
+
+    //----------------------------------------------------------------------------------------------------------
     ui->setupUi(this);
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
@@ -457,8 +437,12 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     glob2 = password;
     glob3 = token;
     ui->label->setText(username);
+    QTimer* timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
 
-    showUsers();
+    // Start the timer to trigger the timeout event every 2 seconds
+    timer->start(2000);
+    //showUsers();
 
 }
 
@@ -561,5 +545,42 @@ void Chatpage::show_chat()
     chats = getuserchats_server_to_chat_display(glob3,user);
 
     int count = 0;
+}
+
+void Chatpage::showUsers()
+{
+    QVector<QString> user = getuserlist(glob3);
+    for(int i = user.size()-1 ; i >= 0; i--){
+        ui->listWidget_2->addItem(user[i]);
+    }
+
+}
+
+
+void Chatpage::on_pushButton_5_clicked()
+{
+    // Clear the selection in the list widget
+    ui->listWidget_2->clearSelection();
+
+    // Get the current items in the list widget
+    QList<QListWidgetItem *> currentItems = ui->listWidget_2->findItems("*", Qt::MatchWildcard);
+
+    // Get the updated list of users
+    QVector<QString> updatedUsers = getuserlist(glob3);
+
+    // Iterate over the current items and remove any that are not in the updated list
+    for (QListWidgetItem *item : currentItems) {
+        if (!updatedUsers.contains(item->text())) {
+            delete ui->listWidget_2->takeItem(ui->listWidget_2->row(item));
+        }
+    }
+
+    // Iterate over the updated list of users and add any that are not already in the list
+    for (const QString& user : updatedUsers) {
+        QList<QListWidgetItem *> matchingItems = ui->listWidget_2->findItems(user, Qt::MatchExactly);
+        if (matchingItems.isEmpty()) {
+            ui->listWidget_2->addItem(user);
+        }
+    }
 }
 
