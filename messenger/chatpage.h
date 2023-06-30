@@ -33,6 +33,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_5_clicked();
+
 private:
     Ui::Chatpage *ui;
     userID mCurrentUser;

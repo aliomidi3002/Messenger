@@ -1,3 +1,4 @@
+#include <QMainWindow>
 #include "chatpage.h"
 #include "ui_chatpage.h"
 #include "ID.h"
@@ -12,6 +13,7 @@
 #include <QVector>
 #include <QTimer>
 #include <QThread>
+#include <QListWidget>
 
 struct MessageBlock;
 QVector<QString> getuserlist(QString token);
@@ -418,37 +420,15 @@ QString glob1;
 QString glob2;
 QString glob3;
 
-void Chatpage::showUsers()
-{
-    QVector<QString> user = getuserlist(glob3);
-    for(int i = user.size()-1 ; i >= 0; i--){
-        ui->listWidget_2->addItem(user[i]);
-    }
-
-}
-
-class myThread2: public QThread
-{
-public:
-    void run() override
-    {
-        while(true)
-        {
-            emit showUsers();
-            sleep(1);
-        }
-    }
-signals:
-    void showUsers();
-};
-
-
-
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
     ui(new Ui::Chatpage),
     mCurrentUser(currentUser)
 {
+    // Create a QTimer object------------------------------------------------------------------------------------
+    // Create and configure the QTimer
+
+    //----------------------------------------------------------------------------------------------------------
     ui->setupUi(this);
     QString username = currentUser.getUsername();
     QString password = currentUser.getPassword();
@@ -545,5 +525,20 @@ void Chatpage::on_pushButton_clicked()
         ;
     };
     close();
+}
+
+void Chatpage::showUsers()
+{
+    QVector<QString> user = getuserlist(glob3);
+    for(int i = user.size()-1 ; i >= 0; i--){
+        ui->listWidget_2->addItem(user[i]);
+    }
+
+}
+
+void Chatpage::on_pushButton_5_clicked()
+{
+    ui->listWidget_2->clear();
+    showUsers();
 }
 
