@@ -6,11 +6,11 @@
 #include <QKeyEvent>
 #include <QWidget>
 #include <QScrollArea>
-#include "newgroup.h"
-#include "newchannel.h"
 #include <QVector>
 #include <QTimer>
 #include <QThread>
+
+
 QString response_code(QString Server_Response){
     //seperating the code out of the respose of the server
     QString searchString1 = "\"204\"";
@@ -78,6 +78,7 @@ QString creategroup (QString token,QString group_name ,QString group_title) {
 
     return response_code(response);
 }
+
 QString createchannel (QString token,QString group_name ,QString group_title) {
 
     QString url1= "http://api.barafardayebehtar.ml:8080/createchannel?token=";
@@ -867,14 +868,6 @@ QString CurrentUsername;
 QString CurrentPassword;
 QString UserToken;
 
-void Chatpage::showUsers()
-{
-    QVector<QString> user = getuserlist(UserToken);
-    for(int i = user.size()-1 ; i >= 0; i--){
-        ui->listWidget_2->addItem(user[i]);
-    }
-
-}
 
 Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QDialog(parent),
@@ -894,7 +887,6 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Chatpage::on_pushButton_5_clicked);
     timer->start(2000);
-
 }
 
 Chatpage::~Chatpage()
@@ -905,43 +897,38 @@ Chatpage::~Chatpage()
 // find user
 void Chatpage::on_toolButton_5_clicked()
 {
+    ui->lineEdit->clear();
     QString username = ui->lineEdit->text();
     sendmessageuser_chat_to_server(UserToken, username, "hi");
 }
 
-// find group
+// create group
 void Chatpage::on_toolButton_3_clicked()
 {
-    NewGroup group;
-    group.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    group.setModal(true);
-    group.exec();
+    ui->lineEdit_3->clear();
+    QString groupName = ui->lineEdit_3->text();
+    creategroup(UserToken,groupName,"title");
+
 }
 
-// find channel
+// create channel
 void Chatpage::on_toolButton_4_clicked()
 {
-    NewChannel channel;
-    channel.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    channel.setModal(true);
-    channel.exec();
+    ui->lineEdit_2->clear();
+    QString ChannelName = ui->lineEdit_2->text();
+    createchannel(UserToken,ChannelName,"title");
+
 }
 
-
-
-void Chatpage::show_chat(QString user)
+// show users chat
+void Chatpage::show_users_chat(QString user)
 {
-
     QVector<MessageBlock> chats = getuserchats_server_to_chat_display(UserToken,user);
     ui->listWidget->clear();
-    int margin = 750;
     for (int i = 0 ; i < chats.size(); i++) {
         // user name
         if(chats.at(i).src == ui->label->text()){
             QString text = chats.at(i).body;
-            for(int i = 0 ; i < text.size(); i++){
-                margin -= 5;
-            }
             QLabel* label = new QLabel(text);
             label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
             label->setAlignment(Qt::AlignLeft);
@@ -957,9 +944,6 @@ void Chatpage::show_chat(QString user)
         }
         else if(chats.at(i).src == ui->label_2->text()){
             QString text = chats.at(i).body;
-            for(int i = 0 ; i < text.size(); i++){
-                margin -= 7;
-            }
             QLabel* label = new QLabel(text);
             label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
             label->setAlignment(Qt::AlignLeft);
@@ -976,7 +960,67 @@ void Chatpage::show_chat(QString user)
     }
 }
 
+// show groups chats
+void Chatpage::show_groups_chats(QString name){
+    QVector<MessageBlock> chats = getgroupchats_server_to_chat_display(UserToken,name);
+    ui->listWidget->clear();
+    for (int i = 0 ; i < chats.size(); i++) {
+        // user name
+        if(chats.at(i).src == ui->label->text()){
+            QString text = chats.at(i).body;
+            QLabel* label = new QLabel(text);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            label->setAlignment(Qt::AlignLeft);
+            int labelHeight = 40 + (text.count('\n') * 20);
+            QListWidgetItem* newItem = new QListWidgetItem();
+            newItem->setSizeHint(QSize(0, labelHeight));
+            ui->listWidget->addItem(newItem);
+            ui->listWidget->setItemWidget(newItem, label);
+            ui->listWidget->setSpacing(10);
+            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
+            ui->listWidget->setStyleSheet(styleSheet);
+            ui->listWidget->scrollToBottom();
+        }
+        else{
+            QString text = chats.at(i).body;
+            QLabel* label = new QLabel(text);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            label->setAlignment(Qt::AlignLeft);
+            int labelHeight = 40 + (text.count('\n') * 20);
+            QListWidgetItem* newItem = new QListWidgetItem();
+            newItem->setSizeHint(QSize(0, labelHeight));
+            ui->listWidget->addItem(newItem);
+            ui->listWidget->setItemWidget(newItem, label);
+            ui->listWidget->setSpacing(10);
+            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
+            ui->listWidget->setStyleSheet(styleSheet);
+            ui->listWidget->scrollToBottom();
+        }
+    }
+}
 
+// show Channel chats
+void Chatpage::show_channel_chats(QString name){
+    QVector<MessageBlock> chats = getchannelchats_server_to_chat_display(UserToken,name);
+    ui->listWidget->clear();
+    for (int i = 0 ; i < chats.size(); i++) {
+        QString text = chats.at(i).body;
+        QLabel* label = new QLabel(text);
+        label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+        label->setAlignment(Qt::AlignLeft);
+        int labelHeight = 40 + (text.count('\n') * 20);
+        QListWidgetItem* newItem = new QListWidgetItem();
+        newItem->setSizeHint(QSize(0, labelHeight));
+        ui->listWidget->addItem(newItem);
+        ui->listWidget->setItemWidget(newItem, label);
+        ui->listWidget->setSpacing(10);
+        QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
+        ui->listWidget->setStyleSheet(styleSheet);
+        ui->listWidget->scrollToBottom();
+    }
+}
+
+// Thread Button
 void Chatpage::on_pushButton_5_clicked()
 {
     QVector<QString> updatedUsers = getuserlist(UserToken);
@@ -984,34 +1028,98 @@ void Chatpage::on_pushButton_5_clicked()
     for (int i = updatedUsers.size() - 1; i >= 0; --i) {
         ui->listWidget_2->addItem(updatedUsers[i]);
     }
+
+
+    QVector<QString> groupList = getgrouplist(UserToken);
+    ui->listWidget_4->clear();
+    for(int i = groupList.size() -1 ; i >= 0; --i){
+        ui->listWidget_4->addItem(groupList[i]);
+    }
+
+
+
+    QVector<QString> channelList = getchannellist(UserToken);
+    ui->listWidget_3->clear();
+    for(int i = channelList.size() -1 ; i >= 0 ; --i){
+        ui->listWidget_3->addItem(channelList[i]);
+    }
 }
 
-void Chatpage::on_pushButton_2_clicked(){
-
+// send message
+void Chatpage::on_pushButton_2_clicked() {
     QString name = ui->label_2->text();
     QString text = ui->textEdit->toPlainText();
-    if(text == nullptr){
+
+    // Get the index of the currently selected tab
+    int currentIndex = ui->tabWidget->currentIndex();
+
+    if (text.isEmpty()) {
         return;
     }
-    sendmessageuser_chat_to_server(UserToken,name,text);
-    ui->textEdit->clear();
-    show_chat(name);
 
+    if (currentIndex == 0) {
+        sendmessageuser_chat_to_server(UserToken, name, text);
+        ui->textEdit->clear();
+        show_users_chat(name);
+
+    } else if (currentIndex == 1) {
+        sendmessagegroup_chat_to_server(UserToken,name,text);
+        ui->textEdit->clear();
+        show_groups_chats(name);
+
+    } else if (currentIndex == 2) {
+        sendmessagechannel_chat_to_server(UserToken,name,text);
+        ui->textEdit->clear();
+        show_channel_chats(name);
+    }
 }
 
-
+// Quit Button
 void Chatpage::on_pushButton_clicked()
 {
     while(logout(CurrentUsername,CurrentPassword)!="200"){
         ;
     };
-    close();
+    QCoreApplication::quit();
 }
 
+// personal chat display on screen
 void Chatpage::on_listWidget_2_itemClicked(QListWidgetItem *item)
 {
     QString name = item->text();
     ui->label_2->setText(name);
-    show_chat(name);
+    show_users_chat(name);
+}
+
+// group chat display on screen
+void Chatpage::on_listWidget_4_itemClicked(QListWidgetItem *item)
+{
+    QString name = item->text();
+    ui->label_2->setText(name);
+    show_groups_chats(name);
+}
+
+// Channel Chat display on Screen
+void Chatpage::on_listWidget_3_itemClicked(QListWidgetItem *item)
+{
+    QString name = item->text();
+    ui->label_2->setText(name);
+    show_channel_chats(name);
+}
+
+// join for group
+void Chatpage::on_pushButton_7_clicked()
+{
+    ui->lineEdit_3->clear();
+    QString groupName = ui->lineEdit_3->text();
+    joingroup(UserToken,groupName);
+}
+
+// join for channel
+void Chatpage::on_pushButton_6_clicked()
+{
+    ui->lineEdit_2->clear();
+    QString ChannelName = ui->lineEdit_2->text();
+    joinchannel(UserToken,ChannelName);
 }
 
