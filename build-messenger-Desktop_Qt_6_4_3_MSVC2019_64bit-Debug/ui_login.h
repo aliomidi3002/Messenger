@@ -47,18 +47,18 @@ public:
 "}\n"
 "\n"
 "QDialog{\n"
-"	background-image: url(:/new/prefix1/image/iStock-697020460-scaled.jpg);\n"
+"	background-image: url(:/new/prefix1/image/R14011_product.webp);\n"
 "}\n"
 "\n"
 "\n"
 "QToolButton{\n"
 "border-radius:60px;\n"
-"background-color: rgb(0, 85, 127);\n"
+"	background-color: rgb(0, 170, 255);\n"
 "}\n"
 "\n"
 "QPushButton{\n"
 "border-radius:15px;\n"
-"background-color: rgb(0, 85, 127);\n"
+"background-color: rgb(0, 170, 255);\n"
 "font: 900 14pt \"Segoe UI Black\";\n"
 "}\n"
 "\n"
@@ -84,11 +84,12 @@ public:
         pushButton->setGeometry(QRect(10, 430, 451, 51));
         label_3 = new QLabel(frame);
         label_3->setObjectName("label_3");
-        label_3->setGeometry(QRect(180, 80, 151, 31));
+        label_3->setGeometry(QRect(170, 70, 151, 31));
         label_3->setStyleSheet(QString::fromUtf8("QLabel{\n"
 "color:white;\n"
 "border-radius:15px;\n"
 "font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)\n"
 "}\n"
 ""));
         label = new QLabel(frame);
@@ -98,6 +99,7 @@ public:
 "color:white;\n"
 "border-radius:15px;\n"
 "font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)\n"
 "}\n"
 ""));
         lineEdit_2 = new QLineEdit(frame);
@@ -111,6 +113,7 @@ public:
 "color:white;\n"
 "border-radius:15px;\n"
 "font: 900 14pt \"Segoe UI Black\";\n"
+"background-color:rgba(0,0,0,0)\n"
 "}\n"
 ""));
         lineEdit_p = new QLineEdit(frame);
@@ -127,11 +130,13 @@ public:
         showPassword->setIconSize(QSize(30, 30));
         label_4 = new QLabel(frame);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(90, 120, 291, 41));
-        label_4->setAlignment(Qt::AlignCenter);
+        label_4->setGeometry(QRect(160, 120, 291, 41));
+        label_4->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
+"font: 700 9pt \"Segoe UI\";"));
+        label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         toolButton = new QToolButton(Login);
         toolButton->setObjectName("toolButton");
-        toolButton->setGeometry(QRect(360, 10, 121, 121));
+        toolButton->setGeometry(QRect(350, 0, 121, 121));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/new/prefix1/image/Sample_User_Icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon1);

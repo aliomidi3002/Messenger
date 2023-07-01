@@ -27,7 +27,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_Chatpage_t {
-    uint offsetsAndSizes[18];
+    uint offsetsAndSizes[26];
     char stringdata0[9];
     char stringdata1[24];
     char stringdata2[1];
@@ -35,8 +35,12 @@ struct qt_meta_stringdata_Chatpage_t {
     char stringdata4[24];
     char stringdata5[24];
     char stringdata6[10];
-    char stringdata7[24];
-    char stringdata8[22];
+    char stringdata7[5];
+    char stringdata8[24];
+    char stringdata9[22];
+    char stringdata10[28];
+    char stringdata11[17];
+    char stringdata12[5];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_Chatpage_t::offsetsAndSizes) + ofs), len 
@@ -49,8 +53,12 @@ Q_CONSTINIT static const qt_meta_stringdata_Chatpage_t qt_meta_stringdata_Chatpa
         QT_MOC_LITERAL(58, 23),  // "on_toolButton_3_clicked"
         QT_MOC_LITERAL(82, 23),  // "on_toolButton_4_clicked"
         QT_MOC_LITERAL(106, 9),  // "show_chat"
-        QT_MOC_LITERAL(116, 23),  // "on_pushButton_5_clicked"
-        QT_MOC_LITERAL(140, 21)   // "on_pushButton_clicked"
+        QT_MOC_LITERAL(116, 4),  // "user"
+        QT_MOC_LITERAL(121, 23),  // "on_pushButton_5_clicked"
+        QT_MOC_LITERAL(145, 21),  // "on_pushButton_clicked"
+        QT_MOC_LITERAL(167, 27),  // "on_listWidget_2_itemClicked"
+        QT_MOC_LITERAL(195, 16),  // "QListWidgetItem*"
+        QT_MOC_LITERAL(212, 4)   // "item"
     },
     "Chatpage",
     "on_pushButton_2_clicked",
@@ -59,8 +67,12 @@ Q_CONSTINIT static const qt_meta_stringdata_Chatpage_t qt_meta_stringdata_Chatpa
     "on_toolButton_3_clicked",
     "on_toolButton_4_clicked",
     "show_chat",
+    "user",
     "on_pushButton_5_clicked",
-    "on_pushButton_clicked"
+    "on_pushButton_clicked",
+    "on_listWidget_2_itemClicked",
+    "QListWidgetItem*",
+    "item"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -71,7 +83,7 @@ Q_CONSTINIT static const uint qt_meta_data_Chatpage[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -79,22 +91,24 @@ Q_CONSTINIT static const uint qt_meta_data_Chatpage[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x08,    1 /* Private */,
-       3,    0,   57,    2, 0x08,    2 /* Private */,
-       4,    0,   58,    2, 0x08,    3 /* Private */,
-       5,    0,   59,    2, 0x08,    4 /* Private */,
-       6,    0,   60,    2, 0x08,    5 /* Private */,
-       7,    0,   61,    2, 0x08,    6 /* Private */,
-       8,    0,   62,    2, 0x08,    7 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    0,   64,    2, 0x08,    3 /* Private */,
+       5,    0,   65,    2, 0x08,    4 /* Private */,
+       6,    1,   66,    2, 0x08,    5 /* Private */,
+       8,    0,   69,    2, 0x08,    7 /* Private */,
+       9,    0,   70,    2, 0x08,    8 /* Private */,
+      10,    1,   71,    2, 0x08,    9 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    7,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 11,   12,
 
        0        // eod
 };
@@ -118,10 +132,14 @@ Q_CONSTINIT const QMetaObject Chatpage::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'show_chat'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'on_pushButton_5_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_pushButton_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_listWidget_2_itemClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>
     >,
     nullptr
 } };
@@ -136,13 +154,13 @@ void Chatpage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->on_toolButton_5_clicked(); break;
         case 2: _t->on_toolButton_3_clicked(); break;
         case 3: _t->on_toolButton_4_clicked(); break;
-        case 4: _t->show_chat(); break;
+        case 4: _t->show_chat((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 5: _t->on_pushButton_5_clicked(); break;
         case 6: _t->on_pushButton_clicked(); break;
+        case 7: _t->on_listWidget_2_itemClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *Chatpage::metaObject() const
@@ -164,13 +182,13 @@ int Chatpage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

@@ -4,6 +4,7 @@
 #include <QUrlQuery>
 #include <QtNetwork>
 #include "mainwindow.h"
+QString logout(QString user,QString pass);
 QString response_code(QString Server_Response);
 QString logout(QString user,QString pass) {
     QString url1= "http://api.barafardayebehtar.ml:8080/logout?username=";

@@ -11,10 +11,201 @@
 #include <QVector>
 #include <QTimer>
 #include <QThread>
+QString response_code(QString Server_Response){
+    //seperating the code out of the respose of the server
+    QString searchString1 = "\"204\"";
+    QString searchString2 = "\"404\"";
+    QString searchString3 = "\"401\"";
+    QString searchString4 = "\"200\"";
+    if(Server_Response.contains(searchString1)){
+        return "204";
+    }
+    if(Server_Response.contains(searchString2)){
+        return "404";
+    }
+    if(Server_Response.contains(searchString3)){
+        return "401";
+    }
+    if(Server_Response.contains(searchString4)){
+        return "200";
+    }
+    else{
+        return "Error";
+    }
+
+}
 
 struct MessageBlock;
-QVector<QString> getuserlist(QString token);
-//MessageBlock* getuserchats_server_to_chat_display(QString token,QString dst);
+QString creategroup (QString token,QString group_name ,QString group_title) {
+
+    QString url1= "http://api.barafardayebehtar.ml:8080/creategroup?token=";
+    QString url2= "&group_name=";
+    QString url3= "&group_title=";
+    url1=url1+token+url2+group_name + url3 + group_title;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    return response_code(response);
+}
+QString createchannel (QString token,QString group_name ,QString group_title) {
+
+    QString url1= "http://api.barafardayebehtar.ml:8080/createchannel?token=";
+    QString url2= "&channel_name=";
+    QString url3= "&channel_title=";
+    url1=url1+token+url2+group_name + url3 + group_title;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    return response_code(response);
+}
+QString joingroup(QString token,QString group_name) {
+
+    QString url1= "http://api.barafardayebehtar.ml:8080/joingroup?token=";
+    QString url2= "&group_name=";
+
+    url1=url1+token+url2+group_name;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    return response_code(response);
+}
+
+QString joinchannel(QString token,QString group_name) {
+
+    QString url1= "http://api.barafardayebehtar.ml:8080/joinchannel?token=";
+    QString url2= "&channel_name=";
+
+    url1=url1+token+url2+group_name;
+    QUrl url(url1);
+    /*
+    QUrl url2("&password=");
+    url = url.resolved(user1);
+    url = url.resolved(url2);
+    url = url.resolved(pass1);*/
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    return response_code(response);
+}
+
 QVector<QString> getuserlist(QString token){
     QString url1= "http://api.barafardayebehtar.ml:8080/getuserlist?token=";
     url1=url1+token;
@@ -74,30 +265,118 @@ QVector<QString> getuserlist(QString token){
 
 }
 
-QString logout(QString user,QString pass);
-QString response_code(QString Server_Response){
-    //seperating the code out of the respose of the server
-    QString searchString1 = "\"204\"";
-    QString searchString2 = "\"404\"";
-    QString searchString3 = "\"401\"";
-    QString searchString4 = "\"200\"";
-    if(Server_Response.contains(searchString1)){
-        return "204";
-    }
-    if(Server_Response.contains(searchString2)){
-        return "404";
-    }
-    if(Server_Response.contains(searchString3)){
-        return "401";
-    }
-    if(Server_Response.contains(searchString4)){
-        return "200";
-    }
-    else{
-        return "Error";
+QVector<QString> getgrouplist(QString token){
+    QString url1= "http://api.barafardayebehtar.ml:8080/getgrouplist?token=";
+    url1=url1+token;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        qDebug() << "Error:" << reply->errorString();
     }
 
+    // Clean up
+    reply->deleteLater();
+
+    QString serverResponse = response;
+
+    QVector<QString> names;
+
+    // Parse the JSON response
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(serverResponse.toUtf8());
+    if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+        QJsonObject jsonObj = jsonDoc.object();
+
+        // Find and extract the "block" objects
+        QStringList blockKeys = jsonObj.keys().filter("block ");
+        for (const QString& blockKey : blockKeys) {
+            QJsonObject blockObj = jsonObj[blockKey].toObject();
+            if (blockObj.contains("group_name")) {
+                names.append(blockObj["group_name"].toString());
+            }
+        }
+    }
+
+    return names;
+
 }
+QVector<QString> getchannellist(QString token){
+    QString url1= "http://api.barafardayebehtar.ml:8080/getchannellist?token=";
+    url1=url1+token;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    QString serverResponse = response;
+
+    QVector<QString> names;
+
+    // Parse the JSON response
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(serverResponse.toUtf8());
+    if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+        QJsonObject jsonObj = jsonDoc.object();
+
+        // Find and extract the "block" objects
+        QStringList blockKeys = jsonObj.keys().filter("block ");
+        for (const QString& blockKey : blockKeys) {
+            QJsonObject blockObj = jsonObj[blockKey].toObject();
+            if (blockObj.contains("channel_name")) {
+                names.append(blockObj["channel_name"].toString());
+            }
+        }
+    }
+
+    return names;
+
+}
+
+QString logout(QString user,QString pass);
 
 QString extractSubstring_for_extracting_the_chat_info(const QString& original, QString& first, QString& second) {
     int firstPos = original.indexOf(first);
@@ -162,7 +441,6 @@ QString sendmessagegroup_chat_to_server(QString token,QString dst , QString body
     QString response_code_login_server = response_code(response);
 
     return response_code_login_server;
-
 }
 
 QString sendmessageuser_chat_to_server(QString token,QString dst , QString body) {
@@ -288,6 +566,176 @@ QString getStringBetweenLastTwoStrings(const QString& first, const QString& seco
 
 QVector<MessageBlock> getuserchats_server_to_chat_display(QString token,QString dst) {
     QString url1= "http://api.barafardayebehtar.ml:8080/getuserchats?token=";
+    QString url2= "&dst=";
+
+    url1=url1+token+url2+dst;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+
+    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
+
+    // Parse the JSON response
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
+
+    if (!jsonResponse.isNull()) {
+        if (jsonResponse.isObject()) {
+            QJsonObject jsonObject = jsonResponse.object();
+
+            // Extract the "message" and "code" values
+            QString message = jsonObject["message"].toString();
+            QString code = jsonObject["code"].toString();
+
+            qDebug() << "Message: " << message;
+            qDebug() << "Code: " << code;
+
+            // Iterate over the blocks
+            QJsonObject::iterator it;
+            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+                QString key = it.key();
+                if (key.startsWith("block")) {
+                    QJsonObject blockObject = it.value().toObject();
+
+                    // Extract values from each block
+                    QString body = blockObject["body"].toString();
+                    QString src = blockObject["src"].toString();
+                    QString dst = blockObject["dst"].toString();
+                    QString date = blockObject["date"].toString();
+
+                    // Create a MessageBlock struct and store it in the array
+                    MessageBlock block;
+                    block.src = src;
+                    block.dst = dst;
+                    block.body = body;
+                    block.date = date;
+
+                    messageBlocks.append(block);
+                }
+            }
+        } else {
+            qDebug() << "Invalid JSON response: Not an object";
+        }
+    } else {
+        qDebug() << "Invalid JSON response: Failed to parse";
+    }
+
+    return messageBlocks;
+}
+
+QVector<MessageBlock> getgroupchats_server_to_chat_display(QString token,QString dst) {
+    QString url1= "http://api.barafardayebehtar.ml:8080/getgroupchats?token=";
+    QString url2= "&dst=";
+
+    url1=url1+token+url2+dst;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+
+    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
+
+    // Parse the JSON response
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
+
+    if (!jsonResponse.isNull()) {
+        if (jsonResponse.isObject()) {
+            QJsonObject jsonObject = jsonResponse.object();
+
+            // Extract the "message" and "code" values
+            QString message = jsonObject["message"].toString();
+            QString code = jsonObject["code"].toString();
+
+            qDebug() << "Message: " << message;
+            qDebug() << "Code: " << code;
+
+            // Iterate over the blocks
+            QJsonObject::iterator it;
+            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+                QString key = it.key();
+                if (key.startsWith("block")) {
+                    QJsonObject blockObject = it.value().toObject();
+
+                    // Extract values from each block
+                    QString body = blockObject["body"].toString();
+                    QString src = blockObject["src"].toString();
+                    QString dst = blockObject["dst"].toString();
+                    QString date = blockObject["date"].toString();
+
+                    // Create a MessageBlock struct and store it in the array
+                    MessageBlock block;
+                    block.src = src;
+                    block.dst = dst;
+                    block.body = body;
+                    block.date = date;
+
+                    messageBlocks.append(block);
+                }
+            }
+        } else {
+            qDebug() << "Invalid JSON response: Not an object";
+        }
+    } else {
+        qDebug() << "Invalid JSON response: Failed to parse";
+    }
+
+    return messageBlocks;
+}
+
+QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token,QString dst) {
+    QString url1= "http://api.barafardayebehtar.ml:8080/getchannelchats?token=";
     QString url2= "&dst=";
 
     url1=url1+token+url2+dst;
