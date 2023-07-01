@@ -485,25 +485,46 @@ void Chatpage::show_chat(QString user)
 {
 
     QVector<MessageBlock> chats = getuserchats_server_to_chat_display(UserToken,user);
-
+    ui->listWidget->clear();
+    int margin = 750;
     for (int i = 0 ; i < chats.size(); i++) {
-        QString text = chats.at(i).body;
-        QLabel* label = new QLabel(text);
-        label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
-        label->setAlignment(Qt::AlignLeft);
-        if (text.length() > 60) {
-            text.insert(60, "\n");
-            label->setText(text);
+        // user name
+        if(chats.at(i).src == ui->label->text()){
+            QString text = chats.at(i).body;
+            for(int i = 0 ; i < text.size(); i++){
+                margin -= 5;
+            }
+            QLabel* label = new QLabel(text);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            label->setAlignment(Qt::AlignLeft);
+            int labelHeight = 40 + (text.count('\n') * 20);
+            QListWidgetItem* newItem = new QListWidgetItem();
+            newItem->setSizeHint(QSize(0, labelHeight));
+            ui->listWidget->addItem(newItem);
+            ui->listWidget->setItemWidget(newItem, label);
+            ui->listWidget->setSpacing(10);
+            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
+            ui->listWidget->setStyleSheet(styleSheet);
+            ui->listWidget->scrollToBottom();
         }
-        int labelHeight = 40 + (text.count('\n') * 20);
-        QListWidgetItem* newItem = new QListWidgetItem();
-        newItem->setSizeHint(QSize(0, labelHeight));
-        ui->listWidget->addItem(newItem);
-        ui->listWidget->setItemWidget(newItem, label);
-        ui->listWidget->setSpacing(10);
-        QString styleSheet = QString("QListWidget::item { padding-left:5px; margin-left: 0; margin-right: 400; margin-bottom: 10px; }");
-        ui->listWidget->setStyleSheet(styleSheet);
-        ui->listWidget->scrollToBottom();
+        else if(chats.at(i).src == ui->label_2->text()){
+            QString text = chats.at(i).body;
+            for(int i = 0 ; i < text.size(); i++){
+                margin -= 7;
+            }
+            QLabel* label = new QLabel(text);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            label->setAlignment(Qt::AlignLeft);
+            int labelHeight = 40 + (text.count('\n') * 20);
+            QListWidgetItem* newItem = new QListWidgetItem();
+            newItem->setSizeHint(QSize(0, labelHeight));
+            ui->listWidget->addItem(newItem);
+            ui->listWidget->setItemWidget(newItem, label);
+            ui->listWidget->setSpacing(10);
+            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
+            ui->listWidget->setStyleSheet(styleSheet);
+            ui->listWidget->scrollToBottom();
+        }
     }
 }
 

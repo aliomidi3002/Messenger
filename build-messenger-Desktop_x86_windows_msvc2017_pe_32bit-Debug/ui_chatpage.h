@@ -110,8 +110,8 @@ public:
         toolButton_2->setObjectName("toolButton_2");
         toolButton_2->setGeometry(QRect(350, 10, 51, 51));
         toolButton_2->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
-"border: 2px solid #717072;;\n"
-"background-color: rgb(0, 170, 255);\n"
+"background-color: rgb(0, 38, 56);\n"
+"border: 2px solid #717072;\n"
 "\n"
 "\n"
 ""));
