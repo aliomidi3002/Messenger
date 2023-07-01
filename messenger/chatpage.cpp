@@ -929,32 +929,79 @@ void Chatpage::show_users_chat(QString user)
         // user name
         if(chats.at(i).src == ui->label->text()){
             QString text = chats.at(i).body;
-            QLabel* label = new QLabel(text);
-            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            QString name = chats.at(i).src;
+            QString date = chats.at(i).date;
+            QString formattedText;
+
+            int charCount = 0;
+            const int maxCharsPerLine = 50;
+            const int marginForLineBreak = 30;
+
+            int labelHeight = 40;  // Initialize the label height with the base height
+
+            QString message = name + ":\n" + text + "\n" + date;
+
+            for (const QChar& character : message) {
+                formattedText.append(character);
+                charCount++;
+
+                if (charCount == maxCharsPerLine) {
+                    formattedText.append('\n');
+                    charCount = 0;
+                    labelHeight += marginForLineBreak; // Add margin for the line break
+                }
+            }
+
+            QLabel* label = new QLabel(formattedText);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255); font: 12pt 'Segoe UI'; border-radius: 5px; margin-right: 400px; }"); // Set the label's style with right margin
             label->setAlignment(Qt::AlignLeft);
-            int labelHeight = 40 + (text.count('\n') * 20);
+
+            labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
+
             QListWidgetItem* newItem = new QListWidgetItem();
             newItem->setSizeHint(QSize(0, labelHeight));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
-            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
-            ui->listWidget->setStyleSheet(styleSheet);
             ui->listWidget->scrollToBottom();
+
         }
         else if(chats.at(i).src == ui->label_2->text()){
             QString text = chats.at(i).body;
-            QLabel* label = new QLabel(text);
-            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            QString name = chats.at(i).src;
+            QString date = chats.at(i).date;
+            QString formattedText;
+
+            int charCount = 0;
+            const int maxCharsPerLine = 50;
+            const int marginForLineBreak = 30;
+
+            int labelHeight = 40;  // Initialize the label height with the base height
+
+            QString message = name + ":\n" + text + "\n" + date;
+
+            for (const QChar& character : message) {
+                formattedText.append(character);
+                charCount++;
+
+                if (charCount == maxCharsPerLine) {
+                    formattedText.append('\n');
+                    charCount = 0;
+                    labelHeight += marginForLineBreak; // Add margin for the line break
+                }
+            }
+
+            QLabel* label = new QLabel(formattedText);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127); font: 12pt 'Segoe UI'; border-radius: 5px; margin-right: 400px; }"); // Set the label's style with right margin
             label->setAlignment(Qt::AlignLeft);
-            int labelHeight = 40 + (text.count('\n') * 20);
+
+            labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
+
             QListWidgetItem* newItem = new QListWidgetItem();
             newItem->setSizeHint(QSize(0, labelHeight));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
-            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
-            ui->listWidget->setStyleSheet(styleSheet);
             ui->listWidget->scrollToBottom();
         }
     }
@@ -968,32 +1015,78 @@ void Chatpage::show_groups_chats(QString name){
         // user name
         if(chats.at(i).src == ui->label->text()){
             QString text = chats.at(i).body;
-            QLabel* label = new QLabel(text);
-            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            QString name = chats.at(i).src;
+            QString date = chats.at(i).date;
+            QString formattedText;
+
+            int charCount = 0;
+            const int maxCharsPerLine = 50;
+            const int marginForLineBreak = 30;
+
+            int labelHeight = 40;  // Initialize the label height with the base height
+
+            QString message = name + ":\n" + text + "\n" + date;
+
+            for (const QChar& character : message) {
+                formattedText.append(character);
+                charCount++;
+
+                if (charCount == maxCharsPerLine) {
+                    formattedText.append('\n');
+                    charCount = 0;
+                    labelHeight += marginForLineBreak; // Add margin for the line break
+                }
+            }
+
+            QLabel* label = new QLabel(formattedText);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255); font: 12pt 'Segoe UI'; border-radius: 5px; margin-right: 400px; }"); // Set the label's style with right margin
             label->setAlignment(Qt::AlignLeft);
-            int labelHeight = 40 + (text.count('\n') * 20);
+
+            labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
+
             QListWidgetItem* newItem = new QListWidgetItem();
             newItem->setSizeHint(QSize(0, labelHeight));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
-            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
-            ui->listWidget->setStyleSheet(styleSheet);
             ui->listWidget->scrollToBottom();
         }
         else{
             QString text = chats.at(i).body;
-            QLabel* label = new QLabel(text);
-            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+            QString name = chats.at(i).src;
+            QString date = chats.at(i).date;
+            QString formattedText;
+
+            int charCount = 0;
+            const int maxCharsPerLine = 50;
+            const int marginForLineBreak = 30;
+
+            int labelHeight = 40;  // Initialize the label height with the base height
+
+            QString message = name + ":\n" + text + "\n" + date;
+
+            for (const QChar& character : message) {
+                formattedText.append(character);
+                charCount++;
+
+                if (charCount == maxCharsPerLine) {
+                    formattedText.append('\n');
+                    charCount = 0;
+                    labelHeight += marginForLineBreak; // Add margin for the line break
+                }
+            }
+
+            QLabel* label = new QLabel(formattedText);
+            label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 85, 127); font: 12pt 'Segoe UI'; border-radius: 5px; margin-right: 400px; }"); // Set the label's style with right margin
             label->setAlignment(Qt::AlignLeft);
-            int labelHeight = 40 + (text.count('\n') * 20);
+
+            labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
+
             QListWidgetItem* newItem = new QListWidgetItem();
             newItem->setSizeHint(QSize(0, labelHeight));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
-            QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
-            ui->listWidget->setStyleSheet(styleSheet);
             ui->listWidget->scrollToBottom();
         }
     }
@@ -1005,17 +1098,40 @@ void Chatpage::show_channel_chats(QString name){
     ui->listWidget->clear();
     for (int i = 0 ; i < chats.size(); i++) {
         QString text = chats.at(i).body;
-        QLabel* label = new QLabel(text);
-        label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255);font: 9pt 'Segoe UI'; border-radius:5px}"); // Set the label's style
+        QString name = chats.at(i).src;
+        QString date = chats.at(i).date;
+        QString formattedText;
+
+        int charCount = 0;
+        const int maxCharsPerLine = 50;
+        const int marginForLineBreak = 30;
+
+        int labelHeight = 40;  // Initialize the label height with the base height
+
+        QString message = name + ":\n" + text + "\n" + date;
+
+        for (const QChar& character : message) {
+            formattedText.append(character);
+            charCount++;
+
+            if (charCount == maxCharsPerLine) {
+                formattedText.append('\n');
+                charCount = 0;
+                labelHeight += marginForLineBreak; // Add margin for the line break
+            }
+        }
+
+        QLabel* label = new QLabel(formattedText);
+        label->setStyleSheet("QLabel { color: white; background-color: rgb(0, 170, 255); font: 12pt 'Segoe UI'; border-radius: 5px; margin-right: 400px; }"); // Set the label's style with right margin
         label->setAlignment(Qt::AlignLeft);
-        int labelHeight = 40 + (text.count('\n') * 20);
+
+        labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
+
         QListWidgetItem* newItem = new QListWidgetItem();
         newItem->setSizeHint(QSize(0, labelHeight));
         ui->listWidget->addItem(newItem);
         ui->listWidget->setItemWidget(newItem, label);
         ui->listWidget->setSpacing(10);
-        QString styleSheet = QString("QListWidget::item { padding-left: 5px; margin-left: 0; margin-right: 760; margin-bottom: 10px; }");
-        ui->listWidget->setStyleSheet(styleSheet);
         ui->listWidget->scrollToBottom();
     }
 }
@@ -1029,14 +1145,11 @@ void Chatpage::on_pushButton_5_clicked()
         ui->listWidget_2->addItem(updatedUsers[i]);
     }
 
-
     QVector<QString> groupList = getgrouplist(UserToken);
     ui->listWidget_4->clear();
     for(int i = groupList.size() -1 ; i >= 0; --i){
         ui->listWidget_4->addItem(groupList[i]);
     }
-
-
 
     QVector<QString> channelList = getchannellist(UserToken);
     ui->listWidget_3->clear();

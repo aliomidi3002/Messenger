@@ -53,7 +53,6 @@ public:
     QPushButton *pushButton_6;
     QLabel *label;
     QToolButton *toolButton;
-    QLabel *label_3;
 
     void setupUi(QDialog *Chatpage)
     {
@@ -151,6 +150,7 @@ public:
         listWidget->setObjectName("listWidget");
         listWidget->setGeometry(QRect(345, 81, 831, 381));
         listWidget->setStyleSheet(QString::fromUtf8("QListWidget{\n"
+"	font: 10pt \"Segoe UI\";\n"
 "background-color: rgba(0,0,0,0.6);\n"
 "border-radius:15px;\n"
 "}\n"
@@ -317,7 +317,7 @@ public:
         label->setGeometry(QRect(50, 10, 251, 41));
         label->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
 "background-color:rgba(0,0,0,0.5);\n"
-"border: 2px solid #717072;;\n"
+"border: 2px solid #717072;\n"
 "font: 700 12pt \"Segoe UI\";\n"
 ""));
         label->setAlignment(Qt::AlignCenter);
@@ -338,10 +338,6 @@ public:
 ""));
         toolButton->setIcon(icon2);
         toolButton->setIconSize(QSize(50, 50));
-        label_3 = new QLabel(Chatpage);
-        label_3->setObjectName("label_3");
-        label_3->setGeometry(QRect(640, 20, 451, 41));
-        label_3->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);"));
 
         retranslateUi(Chatpage);
 
@@ -375,7 +371,6 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Chatpage", "Channel", nullptr));
         label->setText(QString());
         toolButton->setText(QString());
-        label_3->setText(QString());
     } // retranslateUi
 
 };
