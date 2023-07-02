@@ -894,6 +894,28 @@ Chatpage::~Chatpage()
     delete ui;
 }
 
+// Thread Button
+void Chatpage::on_pushButton_5_clicked()
+{
+    QVector<QString> updatedUsers = getuserlist(UserToken);
+    ui->listWidget_2->clear();
+    for (int i = updatedUsers.size() - 1; i >= 0; --i) {
+        ui->listWidget_2->addItem(updatedUsers[i]);
+    }
+
+    QVector<QString> groupList = getgrouplist(UserToken);
+    ui->listWidget_4->clear();
+    for(int i = groupList.size() -1 ; i >= 0; --i){
+        ui->listWidget_4->addItem(groupList[i]);
+    }
+
+    QVector<QString> channelList = getchannellist(UserToken);
+    ui->listWidget_3->clear();
+    for(int i = channelList.size() -1 ; i >= 0 ; --i){
+        ui->listWidget_3->addItem(channelList[i]);
+    }
+}
+
 // find user
 void Chatpage::on_toolButton_5_clicked()
 {
@@ -908,7 +930,6 @@ void Chatpage::on_toolButton_3_clicked()
     ui->lineEdit_3->clear();
     QString groupName = ui->lineEdit_3->text();
     creategroup(UserToken,groupName,"title");
-
 }
 
 // create channel
@@ -916,8 +937,7 @@ void Chatpage::on_toolButton_4_clicked()
 {
     ui->lineEdit_2->clear();
     QString ChannelName = ui->lineEdit_2->text();
-    createchannel(UserToken,ChannelName,"title");
-
+    createchannel(UserToken,ChannelName,"title");;
 }
 
 // show users chat
@@ -1133,28 +1153,6 @@ void Chatpage::show_channel_chats(QString name){
         ui->listWidget->setItemWidget(newItem, label);
         ui->listWidget->setSpacing(10);
         ui->listWidget->scrollToBottom();
-    }
-}
-
-// Thread Button
-void Chatpage::on_pushButton_5_clicked()
-{
-    QVector<QString> updatedUsers = getuserlist(UserToken);
-    ui->listWidget_2->clear();
-    for (int i = updatedUsers.size() - 1; i >= 0; --i) {
-        ui->listWidget_2->addItem(updatedUsers[i]);
-    }
-
-    QVector<QString> groupList = getgrouplist(UserToken);
-    ui->listWidget_4->clear();
-    for(int i = groupList.size() -1 ; i >= 0; --i){
-        ui->listWidget_4->addItem(groupList[i]);
-    }
-
-    QVector<QString> channelList = getchannellist(UserToken);
-    ui->listWidget_3->clear();
-    for(int i = channelList.size() -1 ; i >= 0 ; --i){
-        ui->listWidget_3->addItem(channelList[i]);
     }
 }
 

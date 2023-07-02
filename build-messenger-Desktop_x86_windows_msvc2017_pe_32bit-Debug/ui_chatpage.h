@@ -203,10 +203,21 @@ public:
         listWidget_2 = new QListWidget(tab);
         listWidget_2->setObjectName("listWidget_2");
         listWidget_2->setGeometry(QRect(10, 60, 311, 411));
-        listWidget_2->setStyleSheet(QString::fromUtf8("background-color: rgba(0,0,0,0.6);\n"
+        listWidget_2->setStyleSheet(QString::fromUtf8("QListWidget {\n"
+"background-color: rgba(0,0,0,0.6);\n"
 "border-radius:15px;\n"
+"\n"
+"}\n"
+"QListWidget::item {\n"
 "font: 700 18pt \"Segoe UI\";\n"
-"color: rgb(255, 255, 255);"));
+"color: rgb(255, 255, 255);\n"
+"background-color: rgb(85, 170, 255);\n"
+" text-align: center;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"background-color: rgb(0, 85, 127);\n"
+"}"));
         lineEdit = new QLineEdit(tab);
         lineEdit->setObjectName("lineEdit");
         lineEdit->setGeometry(QRect(60, 17, 261, 31));
