@@ -1,14 +1,20 @@
 #include "chatpage.h"
 #include "ui_chatpage.h"
 #include "ID.h"
+#include <QDebug>
 #include <QUrlQuery>
 #include <QtNetwork>
-#include <QKeyEvent>
+#include <iostream>
+#include <QMap>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QByteArray>
+#include <QJsonArray>
+#include <QString>
 #include <QWidget>
-#include <QScrollArea>
 #include <QVector>
-#include <QTimer>
-#include <QThread>
+#include <QFileDialog>
 #include "logout.h"
 
 
@@ -735,7 +741,7 @@ QVector<MessageBlock> getgroupchats_server_to_chat_display(QString token,QString
 
     return messageBlocks;
 }
-
+//----------------------------------------------*********************************
 QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token,QString dst) {
     QString url1= "http://api.barafardayebehtar.ml:8080/getchannelchats?token=";
     QString url2= "&dst=";
@@ -807,8 +813,9 @@ QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token,QStri
                     block.dst = dst;
                     block.body = body;
                     block.date = date;
-
+                    qDebug()<<block.body<<"\n";
                     messageBlocks.append(block);
+
                 }
             }
         } else {
@@ -819,6 +826,23 @@ QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token,QStri
     }
 
     return messageBlocks;
+}
+QString readFileAsBinary(const QString& filePath)
+{
+    QString binaryString;
+
+    // Open the file for reading
+    QFile file(filePath);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        // Read the file contents
+        QByteArray fileData = file.readAll();
+
+        // Convert to binary string
+        binaryString = QString::fromLatin1(fileData.toBase64());
+    }
+
+    return binaryString;
 }
 
 QString signup(QString user,QString pass) {
@@ -863,6 +887,100 @@ QString signup(QString user,QString pass) {
 
     return response_code(response);
 }
+QVector<QString> splitStringIntoChunks(const QString& str, int chunkSize)
+{
+    QVector<QString> chunks;
+    int length = str.length();
+    int numChunks = (length + chunkSize - 1) / chunkSize;
+
+    for (int i = 0; i < numChunks; ++i) {
+        int start = i * chunkSize;
+        int chunkLength = qMin(chunkSize, length - start);
+        QString chunk = str.mid(start, chunkLength);
+        chunks.append(chunk);
+    }
+
+    return chunks;
+}
+QString base64Encode(const QString& data) {
+    const QString base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+    QString encoded;
+    const QByteArray byteArray = data.toUtf8();
+    const size_t len = byteArray.size();
+    encoded.reserve(((len + 2) / 3) * 4);
+
+    for (size_t i = 0; i < len; i += 3) {
+        unsigned char b0 = byteArray[i];
+        unsigned char b1 = (i + 1 < len) ? byteArray[i + 1] : 0;
+        unsigned char b2 = (i + 2 < len) ? byteArray[i + 2] : 0;
+
+        unsigned char b0_enc = b0 >> 2;
+        unsigned char b1_enc = ((b0 & 0x3) << 4) | (b1 >> 4);
+        unsigned char b2_enc = ((b1 & 0xF) << 2) | (b2 >> 6);
+        unsigned char b3_enc = b2 & 0x3F;
+
+        encoded.append(base64_chars[b0_enc]);
+        encoded.append(base64_chars[b1_enc]);
+        encoded.append((i + 1 < len) ? base64_chars[b2_enc] : '=');
+        encoded.append((i + 2 < len) ? base64_chars[b3_enc] : '=');
+    }
+
+    return encoded;
+}
+QString getFileFormat(const QString& filePath)
+{
+    QFileInfo fileInfo(filePath);
+    QString fileSuffix = fileInfo.suffix();
+    return fileSuffix.toLower();
+}
+
+QString selectFile(QString token,QString dst)
+{
+    QString filePath;
+
+    // Create a file dialog
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::ExistingFile);
+
+    // If the user selects a file
+    if (dialog.exec())
+    {
+        // Get the selected file path(s)
+        QStringList selectedFiles = dialog.selectedFiles();
+
+        if (!selectedFiles.isEmpty())
+        {
+            // Retrieve the first selected file path
+            filePath = selectedFiles.first();
+        }
+    }
+
+    // Read file as binary and return the binary string
+    QString temp1 = "**file**->" + getFileFormat(filePath);
+    sendmessageuser_chat_to_server(token,dst,temp1);
+    return readFileAsBinary(filePath);
+}
+
+QString send_file_user_chat_to_server(QString token,QString dst ) {
+
+    QString end = base64Encode(selectFile(token,dst));
+    qDebug()<<end;
+    int num = (end.length()/500),error=0;
+    QVector<QString> arrey = splitStringIntoChunks(end,500);
+    for (int i = 0; i < num; i++) {
+        qDebug()<<arrey[i]<<"\n\n";
+        while(sendmessageuser_chat_to_server(token,dst,arrey[i])!="200"){
+            error++;
+            if(error>10){return "404";};
+            //std::cout << arrey[i] ;
+        }
+        error =0 ;
+    }
+    sendmessageuser_chat_to_server(token,dst,"**EOF**");
+    //base64Decode(end);
+    return "200";
+}
 
 //uiCode////////////////////////////////////////////////////////////////////////////////////////////////////
 QString CurrentUsername;
@@ -897,26 +1015,7 @@ Chatpage::~Chatpage()
 }
 
 // Thread Button
-void Chatpage::on_pushButton_5_clicked()
-{
-    QVector<QString> updatedUsers = getuserlist(UserToken);
-    ui->listWidget_2->clear();
-    for (int i = updatedUsers.size() - 1; i >= 0; --i) {
-        ui->listWidget_2->addItem(updatedUsers[i]);
-    }
 
-    QVector<QString> groupList = getgrouplist(UserToken);
-    ui->listWidget_4->clear();
-    for(int i = groupList.size() -1 ; i >= 0; --i){
-        ui->listWidget_4->addItem(groupList[i]);
-    }
-
-    QVector<QString> channelList = getchannellist(UserToken);
-    ui->listWidget_3->clear();
-    for(int i = channelList.size() -1 ; i >= 0 ; --i){
-        ui->listWidget_3->addItem(channelList[i]);
-    }
-}
 
 // find user
 void Chatpage::on_toolButton_5_clicked()
@@ -1253,3 +1352,43 @@ void Chatpage::on_pushButton_8_clicked()
     out->show();
 }
 
+
+void Chatpage::on_pushButton_4_clicked()
+{
+    QString dis = ui->label_2->text();
+    QString kkkkk = send_file_user_chat_to_server(UserToken,dis);
+    qDebug()<<kkkkk;
+}
+
+void Chatpage::on_pushButton_5_clicked()
+{
+    int currentindex =  ui->tabWidget->currentIndex();
+
+
+    if(currentindex == 0){
+        QVector<QString> updatedUsers = getuserlist(UserToken);
+        ui->listWidget_2->clear();
+        for (int i = updatedUsers.size() - 1; i >= 0; --i) {
+            ui->listWidget_2->addItem(updatedUsers[i]);
+        }
+        show_users_chat(ui->label_2->text());
+    }
+
+    else if(currentindex == 1){
+        QVector<QString> groupList = getgrouplist(UserToken);
+        ui->listWidget_4->clear();
+        for(int i = groupList.size() -1 ; i >= 0; --i){
+            ui->listWidget_4->addItem(groupList[i]);
+        }
+        show_groups_chats(ui->label_2->text());
+    }
+
+    else if(currentindex == 2){
+        QVector<QString> channelList = getchannellist(UserToken);
+        ui->listWidget_3->clear();
+        for(int i = channelList.size() -1 ; i >= 0 ; --i){
+            ui->listWidget_3->addItem(channelList[i]);
+        }
+        show_channel_chats(ui->label_2->text());
+    }
+}

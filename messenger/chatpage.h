@@ -37,11 +37,10 @@ private slots:
     void show_channel_chats(QString name);
     void on_pushButton_7_clicked();
     void on_listWidget_3_itemClicked(QListWidgetItem *item);
-
     void on_pushButton_6_clicked();
     void on_pushButton_3_clicked();
-
     void on_pushButton_8_clicked();
+    void on_pushButton_4_clicked();
 
 private:
     Ui::Chatpage *ui;

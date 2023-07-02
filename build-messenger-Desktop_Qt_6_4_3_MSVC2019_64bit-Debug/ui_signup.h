@@ -53,7 +53,7 @@ public:
             signUp->setObjectName("signUp");
         signUp->resize(800, 600);
         signUp->setStyleSheet(QString::fromUtf8("QDialog{\n"
-"	background-image: url(:/new/prefix1/image/R14011_product.webp);\n"
+"	background-image: url(:/new/prefix1/image/Qvqz7n.jpg);\n"
 "}\n"
 "\n"
 "QFrame{\n"

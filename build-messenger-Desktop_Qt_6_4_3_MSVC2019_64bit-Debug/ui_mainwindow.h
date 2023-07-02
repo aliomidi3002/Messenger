@@ -35,7 +35,7 @@ public:
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(800, 600);
         MainWindow->setStyleSheet(QString::fromUtf8("QMainWindow{\n"
-"	background-image: url(:/new/prefix1/image/R14011_product.webp);\n"
+"	background-image: url(:/new/prefix1/image/Qvqz7n.jpg);\n"
 "}\n"
 "\n"
 "QLabel{\n"
