@@ -979,7 +979,7 @@ void Chatpage::show_users_chat(QString user)
             labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
 
             QListWidgetItem* newItem = new QListWidgetItem();
-            newItem->setSizeHint(QSize(0, labelHeight));
+            newItem->setSizeHint(QSize(0, labelHeight+25));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
@@ -1018,7 +1018,7 @@ void Chatpage::show_users_chat(QString user)
             labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
 
             QListWidgetItem* newItem = new QListWidgetItem();
-            newItem->setSizeHint(QSize(0, labelHeight));
+            newItem->setSizeHint(QSize(0, labelHeight+25));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
@@ -1065,7 +1065,7 @@ void Chatpage::show_groups_chats(QString name){
             labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
 
             QListWidgetItem* newItem = new QListWidgetItem();
-            newItem->setSizeHint(QSize(0, labelHeight));
+            newItem->setSizeHint(QSize(0, labelHeight+25));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
@@ -1103,7 +1103,7 @@ void Chatpage::show_groups_chats(QString name){
             labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
 
             QListWidgetItem* newItem = new QListWidgetItem();
-            newItem->setSizeHint(QSize(0, labelHeight));
+            newItem->setSizeHint(QSize(0, labelHeight+25));
             ui->listWidget->addItem(newItem);
             ui->listWidget->setItemWidget(newItem, label);
             ui->listWidget->setSpacing(10);
@@ -1148,7 +1148,7 @@ void Chatpage::show_channel_chats(QString name){
         labelHeight += (text.count('\n') * marginForLineBreak); // Adjust the label height for existing line breaks
 
         QListWidgetItem* newItem = new QListWidgetItem();
-        newItem->setSizeHint(QSize(0, labelHeight));
+        newItem->setSizeHint(QSize(0, labelHeight+25));
         ui->listWidget->addItem(newItem);
         ui->listWidget->setItemWidget(newItem, label);
         ui->listWidget->setSpacing(10);

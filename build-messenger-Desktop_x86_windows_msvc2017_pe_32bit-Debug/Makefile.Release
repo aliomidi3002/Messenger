@@ -216,7 +216,6 @@ release\qrc_images.cpp: ..\messenger\images.qrc \
 		..\messenger\image\img_12531.png \
 		..\messenger\image\2889676.png \
 		..\messenger\image\1500458.png \
-		..\messenger\image\R14011_product.webp \
 		..\messenger\image\1200px-New_user_icon-01.svg.png \
 		..\messenger\image\76716.png \
 		..\messenger\image\93634.png \
@@ -224,6 +223,7 @@ release\qrc_images.cpp: ..\messenger\images.qrc \
 		..\messenger\image\send_circle_icon_136236.png \
 		..\messenger\image\iStock-697020460-scaled.jpg \
 		..\messenger\image\img_76872.png \
+		..\messenger\image\R14011_product.jpg \
 		..\messenger\image\7043665.png \
 		..\messenger\image\4779893-200.png \
 		..\messenger\image\Sample_User_Icon.png

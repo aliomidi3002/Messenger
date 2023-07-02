@@ -60,7 +60,7 @@ public:
             Chatpage->setObjectName("Chatpage");
         Chatpage->resize(1200, 600);
         Chatpage->setStyleSheet(QString::fromUtf8("QDialog{\n"
-"	background-image: url(:/new/prefix1/image/R14011_product.webp);\n"
+"	background-image: url(:/new/prefix1/image/R14011_product.jpg);\n"
 "}\n"
 "\n"
 "QPushButton{\n"
@@ -206,10 +206,10 @@ public:
         listWidget_2->setStyleSheet(QString::fromUtf8("QListWidget {\n"
 "background-color: rgba(0,0,0,0.6);\n"
 "border-radius:15px;\n"
+"font: 700 18pt \"Segoe UI\";\n"
 "\n"
 "}\n"
 "QListWidget::item {\n"
-"font: 700 18pt \"Segoe UI\";\n"
 "color: rgb(255, 255, 255);\n"
 "background-color: rgb(85, 170, 255);\n"
 " text-align: center;\n"
