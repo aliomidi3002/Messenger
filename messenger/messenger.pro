@@ -11,7 +11,6 @@ CONFIG += c++17
 
 SOURCES += \
     chatpage.cpp \
-    editprofile.cpp \
     login.cpp \
     logout.cpp \
     main.cpp \
@@ -21,7 +20,6 @@ SOURCES += \
 HEADERS += \
     ID.h \
     chatpage.h \
-    editprofile.h \
     login.h \
     logout.h \
     mainwindow.h \
@@ -30,7 +28,6 @@ HEADERS += \
 
 FORMS += \
     chatpage.ui \
-    editprofile.ui \
     login.ui \
     logout.ui \
     mainwindow.ui \

@@ -9,6 +9,7 @@
 #include <QVector>
 #include <QTimer>
 #include <QThread>
+#include "logout.h"
 
 
 QString response_code(QString Server_Response){
@@ -882,6 +883,7 @@ Chatpage::Chatpage(QWidget *parent, const userID& currentUser) :
     CurrentPassword = password;
     UserToken = token;
 
+    ui->listWidget_5->setVisible(false);
     ui->label->setText(username);
 
     QTimer* timer = new QTimer(this);
@@ -919,24 +921,24 @@ void Chatpage::on_pushButton_5_clicked()
 // find user
 void Chatpage::on_toolButton_5_clicked()
 {
-    ui->lineEdit->clear();
     QString username = ui->lineEdit->text();
+    ui->lineEdit->clear();
     sendmessageuser_chat_to_server(UserToken, username, "hi");
 }
 
 // create group
 void Chatpage::on_toolButton_3_clicked()
 {
-    ui->lineEdit_3->clear();
     QString groupName = ui->lineEdit_3->text();
+    ui->lineEdit_3->clear();
     creategroup(UserToken,groupName,"title");
 }
 
 // create channel
 void Chatpage::on_toolButton_4_clicked()
 {
-    ui->lineEdit_2->clear();
     QString ChannelName = ui->lineEdit_2->text();
+    ui->lineEdit_2->clear();
     createchannel(UserToken,ChannelName,"title");;
 }
 
@@ -1221,22 +1223,33 @@ void Chatpage::on_listWidget_3_itemClicked(QListWidgetItem *item)
 // join for group
 void Chatpage::on_pushButton_7_clicked()
 {
-    ui->lineEdit_3->clear();
     QString groupName = ui->lineEdit_3->text();
+    ui->lineEdit_3->clear();
     joingroup(UserToken,groupName);
 }
 
 // join for channel
 void Chatpage::on_pushButton_6_clicked()
 {
-    ui->lineEdit_2->clear();
     QString ChannelName = ui->lineEdit_2->text();
+    ui->lineEdit_2->clear();
     joinchannel(UserToken,ChannelName);
 }
 
 
 void Chatpage::on_pushButton_3_clicked()
 {
+    int iconWidth = 50;
+    int iconHeight = 50;
+    ui->listWidget_5->setIconSize(QSize(iconWidth, iconHeight));
+    bool isVisible = ui->listWidget_5->isVisible();
+    ui->listWidget_5->setVisible(!isVisible);
+}
 
+// logout
+void Chatpage::on_pushButton_8_clicked()
+{
+    LogOut *out = new LogOut(this);
+    out->show();
 }
 

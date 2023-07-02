@@ -53,6 +53,8 @@ public:
     QPushButton *pushButton_6;
     QLabel *label;
     QToolButton *toolButton;
+    QListWidget *listWidget_5;
+    QPushButton *pushButton_8;
 
     void setupUi(QDialog *Chatpage)
     {
@@ -157,7 +159,7 @@ public:
 ""));
         pushButton = new QPushButton(Chatpage);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(1140, 30, 31, 31));
+        pushButton->setGeometry(QRect(1140, 20, 31, 31));
         pushButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "	background-color: rgb(170, 0, 0);\n"
 "}\n"
@@ -172,7 +174,7 @@ public:
         pushButton->setIconSize(QSize(25, 25));
         pushButton_5 = new QPushButton(Chatpage);
         pushButton_5->setObjectName("pushButton_5");
-        pushButton_5->setGeometry(QRect(1030, 20, 41, 31));
+        pushButton_5->setGeometry(QRect(660, 20, 41, 31));
         pushButton_5->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);"));
         tabWidget = new QTabWidget(Chatpage);
         tabWidget->setObjectName("tabWidget");
@@ -210,9 +212,10 @@ public:
 "\n"
 "}\n"
 "QListWidget::item {\n"
-"color: rgb(255, 255, 255);\n"
-"background-color: rgb(85, 170, 255);\n"
-" text-align: center;\n"
+"border-radius:20px;\n"
+"background-color:rgba(0,0,0,0.5);\n"
+"border: 2px solid #717072;\n"
+"color:white;\n"
 "}\n"
 "\n"
 "QListWidget::item:selected {\n"
@@ -349,6 +352,72 @@ public:
 ""));
         toolButton->setIcon(icon2);
         toolButton->setIconSize(QSize(50, 50));
+        listWidget_5 = new QListWidget(Chatpage);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/new/prefix1/image/5-2-face-with-tears-of-joy-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem->setIcon(icon9);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/new/prefix1/image/11-2-loudly-crying-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem1->setIcon(icon10);
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/new/prefix1/image/1-2-wink-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem2 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem2->setIcon(icon11);
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/new/prefix1/image/3-2-love-hearts-eyes-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem3 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem3->setIcon(icon12);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/new/prefix1/image/4-2-smiling-face-with-sunglasses-cool-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem4 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem4->setIcon(icon13);
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/new/prefix1/image/6-2-angel-blushing-smile-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem5 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem5->setIcon(icon14);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/new/prefix1/image/8-2-fearful-emoji-png-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem6 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem6->setIcon(icon15);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/new/prefix1/image/58685-apple-color-symbol-fire-shape-iphone-emoji-thumb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QListWidgetItem *__qlistwidgetitem7 = new QListWidgetItem(listWidget_5);
+        __qlistwidgetitem7->setIcon(icon16);
+        listWidget_5->setObjectName("listWidget_5");
+        listWidget_5->setGeometry(QRect(1100, 230, 81, 261));
+        listWidget_5->setStyleSheet(QString::fromUtf8("QListWidget {\n"
+"background-color: rgba(0,0,0,0.6);\n"
+"border-radius:15px;\n"
+"font: 700 18pt \"Segoe UI\";\n"
+"\n"
+"}\n"
+"QListWidget::item {\n"
+"border-radius:20px;\n"
+"background-color:rgba(0,0,0,0.5);\n"
+"color:white;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"border: 2px solid #717072;\n"
+"}"));
+        pushButton_8 = new QPushButton(Chatpage);
+        pushButton_8->setObjectName("pushButton_8");
+        pushButton_8->setGeometry(QRect(1100, 20, 31, 31));
+        pushButton_8->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"background-color: rgb(135, 45, 0);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	background-color: rgb(255, 85, 0);\n"
+"}\n"
+""));
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/new/prefix1/image/126467.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_8->setIcon(icon17);
+        pushButton_8->setIconSize(QSize(25, 25));
 
         retranslateUi(Chatpage);
 
@@ -382,6 +451,12 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Chatpage", "Channel", nullptr));
         label->setText(QString());
         toolButton->setText(QString());
+
+        const bool __sortingEnabled = listWidget_5->isSortingEnabled();
+        listWidget_5->setSortingEnabled(false);
+        listWidget_5->setSortingEnabled(__sortingEnabled);
+
+        pushButton_8->setText(QString());
     } // retranslateUi
 
 };

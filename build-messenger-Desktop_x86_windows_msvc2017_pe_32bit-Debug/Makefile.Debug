@@ -207,19 +207,26 @@ debug\qrc_images.cpp: ..\messenger\images.qrc \
 		..\messenger\image\3566345.png \
 		..\messenger\image\free-settings-icon-3110-thumb.png \
 		..\messenger\image\Qvqz7n.jpg \
+		..\messenger\image\3-2-love-hearts-eyes-emoji-png-thumb.png \
+		..\messenger\image\8-2-fearful-emoji-png-thumb.png \
 		..\messenger\image\clip-icon.png \
 		..\messenger\image\126467.png \
 		..\messenger\image\search-icon.png \
 		..\messenger\image\165869.jpg \
 		..\messenger\image\emoji-smile-icon-symbol-on-yellow-background-smiley-face-cartoon-character-wallpaper-vector.jpg \
+		..\messenger\image\5-2-face-with-tears-of-joy-emoji-png-thumb.png \
 		..\messenger\image\user-icon-2048x2048-ihoxz4vq.png \
+		..\messenger\image\4-2-smiling-face-with-sunglasses-cool-emoji-png-thumb.png \
 		..\messenger\image\hd-settings-black-line-icon-png-11640542802zybarymqkq.png \
 		..\messenger\image\free-file-icon-1453-thumb.png \
 		..\messenger\image\3566345.png \
+		..\messenger\image\1-2-wink-emoji-png-thumb.png \
 		..\messenger\image\img_12531.png \
 		..\messenger\image\2889676.png \
 		..\messenger\image\1500458.png \
 		..\messenger\image\1200px-New_user_icon-01.svg.png \
+		..\messenger\image\11-2-loudly-crying-emoji-png-thumb.png \
+		..\messenger\image\6-2-angel-blushing-smile-emoji-png-thumb.png \
 		..\messenger\image\blush-clouds-daydream.jpg \
 		..\messenger\image\76716.png \
 		..\messenger\image\93634.png \
@@ -231,6 +238,7 @@ debug\qrc_images.cpp: ..\messenger\images.qrc \
 		..\messenger\image\7043665.png \
 		..\messenger\image\4779893-200.png \
 		..\messenger\image\hd-aesthetic-cloud-wallpaper-whatspaper-1.jpg \
+		..\messenger\image\58685-apple-color-symbol-fire-shape-iphone-emoji-thumb.png \
 		..\messenger\image\Sample_User_Icon.png
 	C:\Qt\6.5.1\msvc2019_64\bin\rcc.exe -name images --no-zstd ..\messenger\images.qrc -o debug\qrc_images.cpp
 
