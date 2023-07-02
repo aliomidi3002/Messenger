@@ -60,7 +60,7 @@ public:
             Chatpage->setObjectName("Chatpage");
         Chatpage->resize(1200, 600);
         Chatpage->setStyleSheet(QString::fromUtf8("QDialog{\n"
-"	background-image: url(:/new/prefix1/image/R14011_product.jpg);\n"
+"	background-image: url(:/new/prefix1/image/Qvqz7n.jpg);\n"
 "}\n"
 "\n"
 "QPushButton{\n"

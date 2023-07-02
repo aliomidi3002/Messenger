@@ -39,6 +39,7 @@ private slots:
     void on_listWidget_3_itemClicked(QListWidgetItem *item);
 
     void on_pushButton_6_clicked();
+    void on_pushButton_3_clicked();
 
 private:
     Ui::Chatpage *ui;

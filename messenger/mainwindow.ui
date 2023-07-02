@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
-	background-image: url(:/new/prefix1/image/R14011_product.jpg);
+	background-image: url(:/new/prefix1/image/Qvqz7n.jpg);
 }
 
 QLabel{

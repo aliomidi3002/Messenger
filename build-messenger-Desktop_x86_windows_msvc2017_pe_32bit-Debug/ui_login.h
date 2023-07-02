@@ -47,7 +47,7 @@ public:
 "}\n"
 "\n"
 "QDialog{\n"
-"	background-image: url(:/new/prefix1/image/R14011_product.jpg);\n"
+"	background-image: url(:/new/prefix1/image/Qvqz7n.jpg);\n"
 "}\n"
 "\n"
 "\n"

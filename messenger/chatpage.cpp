@@ -1234,3 +1234,9 @@ void Chatpage::on_pushButton_6_clicked()
     joinchannel(UserToken,ChannelName);
 }
 
+
+void Chatpage::on_pushButton_3_clicked()
+{
+
+}
+
