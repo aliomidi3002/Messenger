@@ -541,22 +541,198 @@ struct MessageBlock {
     QString src;
     QString dst;
     QString body;
-    QString date;
+    QDateTime dateTime; // Updated to use QDateTime for date and time
+    QString dateString; // Added QString member for date
 };
 
-QString findSubstringAndReturnRest(const QString& originalString, const QString& substring)
-{
-    int index = originalString.indexOf(substring);
-
-    if (index != -1) {
-        // Found the substring, return the portion of the string starting from the occurrence
-        return originalString.mid(index + substring.length());
-    }
-
-    // Substring not found, return an empty string
-    return "";
+// Custom sorting function for MessageBlock objects based on the date
+bool sortMessageBlocks(const MessageBlock& block1, const MessageBlock& block2) {
+    return block1.dateTime < block2.dateTime;
 }
 
+
+QVector<MessageBlock> getgroupchats_server_to_chat_display(QString token, QString dst) {
+    QString url1 = "http://api.barafardayebehtar.ml:8080/getgroupchats?token=";
+    QString url2 = "&dst=";
+
+    url1 = url1 + token + url2 + dst;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+
+    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
+
+    // Parse the JSON response
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
+
+    if (!jsonResponse.isNull()) {
+        if (jsonResponse.isObject()) {
+            QJsonObject jsonObject = jsonResponse.object();
+
+            // Extract the "message" and "code" values
+            QString message = jsonObject["message"].toString();
+            QString code = jsonObject["code"].toString();
+
+            qDebug() << "Message: " << message;
+            qDebug() << "Code: " << code;
+
+            // Iterate over the blocks
+            QJsonObject::iterator it;
+            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+                QString key = it.key();
+                if (key.startsWith("block")) {
+                    QJsonObject blockObject = it.value().toObject();
+
+                    // Extract values from each block
+                    QString body = blockObject["body"].toString();
+                    QString src = blockObject["src"].toString();
+                    QString dst = blockObject["dst"].toString();
+                    QString date = blockObject["date"].toString();
+
+                    // Convert the date string to QDateTime
+                    QDateTime dateTime = QDateTime::fromString(date, "yyyy-MM-dd hh:mm:ss");
+
+                    // Convert the QDateTime to a formatted date string
+                    QString dateString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+
+                    // Create a MessageBlock struct and store it in the array
+                    MessageBlock block;
+                    block.src = src;
+                    block.dst = dst;
+                    block.body = body;
+                    block.dateTime = dateTime;
+                    block.dateString = dateString;
+                    messageBlocks.append(block);
+                }
+            }
+        } else {
+            qDebug() << "Invalid JSON response: Not an object";
+        }
+    } else {
+        qDebug() << "Invalid JSON response: Failed to parse";
+    }
+
+    // Sort the messageBlocks QVector using the custom sorting function
+    std::sort(messageBlocks.begin(), messageBlocks.end(), sortMessageBlocks);
+
+    return messageBlocks;
+}
+QVector<MessageBlock> getuserchats_server_to_chat_display(QString token, QString dst) {
+    QString url1 = "http://api.barafardayebehtar.ml:8080/getuserchats?token=";
+    QString url2 = "&dst=";
+
+    url1 = url1 + token + url2 + dst;
+    QUrl url(url1);
+
+    // Create a QNetworkAccessManager object
+    QNetworkAccessManager manager;
+
+    // Create a QNetworkRequest object and set the URL
+    QNetworkRequest request;
+    request.setUrl(url);
+
+    // Send the GET request
+    QNetworkReply* reply = manager.get(request);
+
+    // Wait for the request to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QString response;
+    if (reply->error() == QNetworkReply::NoError) {
+        // Reading the response data
+        QByteArray responseData = reply->readAll();
+        response = QString(responseData);
+    } else {
+        // Handle error cases
+        //qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    reply->deleteLater();
+
+    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
+
+    // Parse the JSON response
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
+
+    if (!jsonResponse.isNull()) {
+        if (jsonResponse.isObject()) {
+            QJsonObject jsonObject = jsonResponse.object();
+
+            // Extract the "message" and "code" values
+            QString message = jsonObject["message"].toString();
+            QString code = jsonObject["code"].toString();
+
+            qDebug() << "Message: " << message;
+            qDebug() << "Code: " << code;
+
+            // Iterate over the blocks
+            QJsonObject::iterator it;
+            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+                QString key = it.key();
+                if (key.startsWith("block")) {
+                    QJsonObject blockObject = it.value().toObject();
+
+                    // Extract values from each block
+                    QString body = blockObject["body"].toString();
+                    QString src = blockObject["src"].toString();
+                    QString dst = blockObject["dst"].toString();
+                    QString date = blockObject["date"].toString();
+
+                    // Create a MessageBlock struct and store it in the array
+                    MessageBlock block;
+                    block.src = src;
+                    block.dst = dst;
+                    block.body = body;
+                    block.dateTime = QDateTime::fromString(date, "yyyy-MM-dd hh:mm:ss");
+                    block.dateString = block.dateTime.toString("yyyy-MM-dd");
+
+                    messageBlocks.append(block);
+                }
+            }
+
+            // Sort the messageBlocks by dateTime in ascending order
+            std::sort(messageBlocks.begin(), messageBlocks.end(), [](const MessageBlock& a, const MessageBlock& b) {
+                return a.dateTime < b.dateTime;
+            });
+        } else {
+            qDebug() << "Invalid JSON response: Not an object";
+        }
+    } else {
+        qDebug() << "Invalid JSON response: Failed to parse";
+    }
+
+    return messageBlocks;
+}
 QString getStringBetweenLastTwoStrings(const QString& first, const QString& second, const QString& third)
 {
     int secondIndex = first.lastIndexOf(second);
@@ -571,12 +747,11 @@ QString getStringBetweenLastTwoStrings(const QString& first, const QString& seco
     int length = thirdIndex - startIndex;
     return first.mid(startIndex, length);
 }
+QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token, QString dst) {
+    QString url1 = "http://api.barafardayebehtar.ml:8080/getchannelchats?token=";
+    QString url2 = "&dst=";
 
-QVector<MessageBlock> getuserchats_server_to_chat_display(QString token,QString dst) {
-    QString url1= "http://api.barafardayebehtar.ml:8080/getuserchats?token=";
-    QString url2= "&dst=";
-
-    url1=url1+token+url2+dst;
+    url1 = url1 + token + url2 + dst;
     QUrl url(url1);
 
     // Create a QNetworkAccessManager object
@@ -637,13 +812,19 @@ QVector<MessageBlock> getuserchats_server_to_chat_display(QString token,QString 
                     QString dst = blockObject["dst"].toString();
                     QString date = blockObject["date"].toString();
 
+                    // Convert the date string to QDateTime
+                    QDateTime dateTime = QDateTime::fromString(date, "yyyy-MM-dd hh:mm:ss");
+
+                    // Convert the QDateTime to a formatted date string
+                    QString dateString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+
                     // Create a MessageBlock struct and store it in the array
                     MessageBlock block;
                     block.src = src;
                     block.dst = dst;
                     block.body = body;
-                    block.date = date;
-
+                    block.dateTime = dateTime;
+                    block.dateString = dateString;
                     messageBlocks.append(block);
                 }
             }
@@ -654,179 +835,12 @@ QVector<MessageBlock> getuserchats_server_to_chat_display(QString token,QString 
         qDebug() << "Invalid JSON response: Failed to parse";
     }
 
-    return messageBlocks;
-}
-
-QVector<MessageBlock> getgroupchats_server_to_chat_display(QString token,QString dst) {
-    QString url1= "http://api.barafardayebehtar.ml:8080/getgroupchats?token=";
-    QString url2= "&dst=";
-
-    url1=url1+token+url2+dst;
-    QUrl url(url1);
-
-    // Create a QNetworkAccessManager object
-    QNetworkAccessManager manager;
-
-    // Create a QNetworkRequest object and set the URL
-    QNetworkRequest request;
-    request.setUrl(url);
-
-    // Send the GET request
-    QNetworkReply* reply = manager.get(request);
-
-    // Wait for the request to finish
-    QEventLoop loop;
-    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    QString response;
-    if (reply->error() == QNetworkReply::NoError) {
-        // Reading the response data
-        QByteArray responseData = reply->readAll();
-        response = QString(responseData);
-    } else {
-        // Handle error cases
-        //qDebug() << "Error:" << reply->errorString();
-    }
-
-    // Clean up
-    reply->deleteLater();
-
-
-    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
-
-    // Parse the JSON response
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
-
-    if (!jsonResponse.isNull()) {
-        if (jsonResponse.isObject()) {
-            QJsonObject jsonObject = jsonResponse.object();
-
-            // Extract the "message" and "code" values
-            QString message = jsonObject["message"].toString();
-            QString code = jsonObject["code"].toString();
-
-            qDebug() << "Message: " << message;
-            qDebug() << "Code: " << code;
-
-            // Iterate over the blocks
-            QJsonObject::iterator it;
-            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
-                QString key = it.key();
-                if (key.startsWith("block")) {
-                    QJsonObject blockObject = it.value().toObject();
-
-                    // Extract values from each block
-                    QString body = blockObject["body"].toString();
-                    QString src = blockObject["src"].toString();
-                    QString dst = blockObject["dst"].toString();
-                    QString date = blockObject["date"].toString();
-
-                    // Create a MessageBlock struct and store it in the array
-                    MessageBlock block;
-                    block.src = src;
-                    block.dst = dst;
-                    block.body = body;
-                    block.date = date;
-
-                    messageBlocks.append(block);
-                }
-            }
-        } else {
-            qDebug() << "Invalid JSON response: Not an object";
-        }
-    } else {
-        qDebug() << "Invalid JSON response: Failed to parse";
-    }
+    // Sort the messageBlocks QVector using the custom sorting function
+    std::sort(messageBlocks.begin(), messageBlocks.end(), sortMessageBlocks);
 
     return messageBlocks;
 }
-//----------------------------------------------*********************************
-QVector<MessageBlock> getchannelchats_server_to_chat_display(QString token,QString dst) {
-    QString url1= "http://api.barafardayebehtar.ml:8080/getchannelchats?token=";
-    QString url2= "&dst=";
 
-    url1=url1+token+url2+dst;
-    QUrl url(url1);
-
-    // Create a QNetworkAccessManager object
-    QNetworkAccessManager manager;
-
-    // Create a QNetworkRequest object and set the URL
-    QNetworkRequest request;
-    request.setUrl(url);
-
-    // Send the GET request
-    QNetworkReply* reply = manager.get(request);
-
-    // Wait for the request to finish
-    QEventLoop loop;
-    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    QString response;
-    if (reply->error() == QNetworkReply::NoError) {
-        // Reading the response data
-        QByteArray responseData = reply->readAll();
-        response = QString(responseData);
-    } else {
-        // Handle error cases
-        //qDebug() << "Error:" << reply->errorString();
-    }
-
-    // Clean up
-    reply->deleteLater();
-
-
-    QVector<MessageBlock> messageBlocks; // Array to store the MessageBlocks
-
-    // Parse the JSON response
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(response.toUtf8());
-
-    if (!jsonResponse.isNull()) {
-        if (jsonResponse.isObject()) {
-            QJsonObject jsonObject = jsonResponse.object();
-
-            // Extract the "message" and "code" values
-            QString message = jsonObject["message"].toString();
-            QString code = jsonObject["code"].toString();
-
-            qDebug() << "Message: " << message;
-            qDebug() << "Code: " << code;
-
-            // Iterate over the blocks
-            QJsonObject::iterator it;
-            for (it = jsonObject.begin(); it != jsonObject.end(); ++it) {
-                QString key = it.key();
-                if (key.startsWith("block")) {
-                    QJsonObject blockObject = it.value().toObject();
-
-                    // Extract values from each block
-                    QString body = blockObject["body"].toString();
-                    QString src = blockObject["src"].toString();
-                    QString dst = blockObject["dst"].toString();
-                    QString date = blockObject["date"].toString();
-
-                    // Create a MessageBlock struct and store it in the array
-                    MessageBlock block;
-                    block.src = src;
-                    block.dst = dst;
-                    block.body = body;
-                    block.date = date;
-                    qDebug()<<block.body<<"\n";
-                    messageBlocks.append(block);
-
-                }
-            }
-        } else {
-            qDebug() << "Invalid JSON response: Not an object";
-        }
-    } else {
-        qDebug() << "Invalid JSON response: Failed to parse";
-    }
-
-    return messageBlocks;
-}
 QString readFileAsBinary(const QString& filePath)
 {
     QString binaryString;
@@ -1051,7 +1065,7 @@ void Chatpage::show_users_chat(QString user)
         if(chats.at(i).src == ui->label->text()){
             QString text = chats.at(i).body;
             QString name = chats.at(i).src;
-            QString date = chats.at(i).date;
+            QString date = chats.at(i).dateString;
             QString formattedText;
 
             int charCount = 0;
@@ -1090,7 +1104,7 @@ void Chatpage::show_users_chat(QString user)
         else if(chats.at(i).src == ui->label_2->text()){
             QString text = chats.at(i).body;
             QString name = chats.at(i).src;
-            QString date = chats.at(i).date;
+            QString date = chats.at(i).dateString;
             QString formattedText;
 
             int charCount = 0;
@@ -1137,7 +1151,7 @@ void Chatpage::show_groups_chats(QString name){
         if(chats.at(i).src == ui->label->text()){
             QString text = chats.at(i).body;
             QString name = chats.at(i).src;
-            QString date = chats.at(i).date;
+            QString date = chats.at(i).dateString;
             QString formattedText;
 
             int charCount = 0;
@@ -1175,7 +1189,7 @@ void Chatpage::show_groups_chats(QString name){
         else{
             QString text = chats.at(i).body;
             QString name = chats.at(i).src;
-            QString date = chats.at(i).date;
+            QString date = chats.at(i).dateString;
             QString formattedText;
 
             int charCount = 0;
@@ -1220,7 +1234,7 @@ void Chatpage::show_channel_chats(QString name){
     for (int i = 0 ; i < chats.size(); i++) {
         QString text = chats.at(i).body;
         QString name = chats.at(i).src;
-        QString date = chats.at(i).date;
+        QString date = chats.at(i).dateString;
         QString formattedText;
 
         int charCount = 0;
